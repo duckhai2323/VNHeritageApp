@@ -16,100 +16,100 @@ class HomePage extends GetView<HomeController>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundColor,
       body: CustomScrollView(
         controller: controller.scrollController,
         slivers: [
-          Obx(() =>SliverAppBar(
-            titleSpacing: 0,
-            automaticallyImplyLeading: false,
-            pinned: true,
-            toolbarHeight: controller.isSliverAppBarExpanded.value?120:0,
-            backgroundColor: Colors.white,
-            title:controller.isSliverAppBarExpanded.value? Container(
-              width: MediaQuery.of(context).size.width,
-              color: Colors.white,
-              height: 120,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 50,top: 15, bottom: 5),
-                    width: MediaQuery.of(context).size.width-100,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: AppColors.bgSearch,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Icon(Icons.search, size: 30, color: AppColors.bottomNaviColor,),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          'Tỉnh thành, điểm đến, điểm...',
-                          style: TextStyle(
-                            color: AppColors.placeHolderColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Container(
-                      height: 50,
-                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 6,
-                        shrinkWrap: true,
-                        //itemExtent: 40,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                             margin: EdgeInsets.only(right: 30),
-                              height: 44,
-                              width: 44,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(22),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.2),
-                                      spreadRadius: 0.25,
-                                      blurRadius: 5,
-                                      offset: Offset(0,1),
-                                    )
-                                  ]
-                              ),
-                              child: const Center(
-                                child: CircleAvatar(
-                                  radius: 20,
-                                  backgroundColor: AppColors.iconHomeColor1,
-                                  child: Icon(Icons.store, size: 28, color: Colors.white,),
-                                ),
-                              )
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ):null,
-          ),),
+          // Obx(() =>SliverAppBar(
+          //   titleSpacing: 0,
+          //   automaticallyImplyLeading: false,
+          //   pinned: true,
+          //   toolbarHeight: controller.isSliverAppBarExpanded.value?120:0,
+          //   backgroundColor: Colors.white,
+          //   title:controller.isSliverAppBarExpanded.value? Container(
+          //     width: MediaQuery.of(context).size.width,
+          //     color: Colors.white,
+          //     height: 120,
+          //     child: Column(
+          //       mainAxisAlignment: MainAxisAlignment.start,
+          //       mainAxisSize: MainAxisSize.max,
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         Container(
+          //           margin: EdgeInsets.only(left: 50,top: 15, bottom: 5),
+          //           width: MediaQuery.of(context).size.width-100,
+          //           height: 40,
+          //           decoration: BoxDecoration(
+          //             color: AppColors.bgSearch,
+          //             borderRadius: BorderRadius.circular(8),
+          //           ),
+          //           child: const Row(
+          //             mainAxisAlignment: MainAxisAlignment.start,
+          //             mainAxisSize: MainAxisSize.max,
+          //             children: [
+          //               SizedBox(
+          //                 width: 10,
+          //               ),
+          //               Icon(Icons.search, size: 30, color: AppColors.bottomNaviColor,),
+          //               SizedBox(
+          //                 width: 5,
+          //               ),
+          //               Text(
+          //                 'Tỉnh thành, điểm đến, điểm...',
+          //                 style: TextStyle(
+          //                   color: AppColors.placeHolderColor,
+          //                   fontSize: 18,
+          //                   fontWeight: FontWeight.w500,
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //
+          //         SingleChildScrollView(
+          //           scrollDirection: Axis.horizontal,
+          //           child: Container(
+          //             height: 50,
+          //             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+          //             child: ListView.builder(
+          //               scrollDirection: Axis.horizontal,
+          //               physics: const NeverScrollableScrollPhysics(),
+          //               itemCount: 6,
+          //               shrinkWrap: true,
+          //               //itemExtent: 40,
+          //               itemBuilder: (BuildContext context, int index) {
+          //                 return Container(
+          //                    margin: EdgeInsets.only(right: 30),
+          //                     height: 44,
+          //                     width: 44,
+          //                     decoration: BoxDecoration(
+          //                         color: Colors.white,
+          //                         borderRadius: BorderRadius.circular(22),
+          //                         boxShadow: [
+          //                           BoxShadow(
+          //                             color: Colors.grey.withOpacity(0.2),
+          //                             spreadRadius: 0.25,
+          //                             blurRadius: 5,
+          //                             offset: Offset(0,1),
+          //                           )
+          //                         ]
+          //                     ),
+          //                     child: const Center(
+          //                       child: CircleAvatar(
+          //                         radius: 20,
+          //                         backgroundColor: AppColors.iconHomeColor1,
+          //                         child: Icon(Icons.store, size: 28, color: Colors.white,),
+          //                       ),
+          //                     )
+          //                 );
+          //               },
+          //             ),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ):null,
+          // ),),
 
           SliverToBoxAdapter(
             child: SizedBox(
@@ -172,7 +172,7 @@ class HomePage extends GetView<HomeController>{
                       height: 40,
                       width: MediaQuery.of(context).size.width,
                       decoration: const BoxDecoration(
-                        color: Colors.white,
+                        color:AppColors.backgroundColor,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(25),
                           topRight: Radius.circular(25),
@@ -389,7 +389,7 @@ class HomePage extends GetView<HomeController>{
                             color: Color.fromRGBO(102, 102, 102, 1),
                             borderRadius: BorderRadius.circular(3),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Điểm tham quan',
                             style: TextStyle(
                                 fontSize: 15,
@@ -411,7 +411,7 @@ class HomePage extends GetView<HomeController>{
                               color: Color.fromRGBO(102, 102, 102, 1),
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Sự kiện tổ chức',
                             style: TextStyle(
                                 fontSize: 15,
@@ -422,7 +422,7 @@ class HomePage extends GetView<HomeController>{
                         ),
                       ],
                     ),
-                    Text(
+                    const Text(
                       'Xem tất cả',
                       style: TextStyle(
                           fontSize: 16,
@@ -447,7 +447,7 @@ class HomePage extends GetView<HomeController>{
                   itemCount: 5,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext contex, int index) {
-                    return HeritageItem(context);
+                    return InkWell(onTap: (){ controller.HandleHeritageDetailsPage();},child: HeritageItem(context));
                   },
                 ),
               ),

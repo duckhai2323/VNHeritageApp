@@ -8,4 +8,5 @@ class AppColors {
   static const Color placeHolderColor = Color.fromRGBO(155, 155, 155, 1);
   static const Color bgSearch = Color.fromRGBO(242, 243, 245, 1);
   static const Color bottomNaviColor = Color.fromRGBO(61,59,190, 1);
+  static const Color backgroundColor = Color.fromRGBO(251, 255, 255,1);
 }

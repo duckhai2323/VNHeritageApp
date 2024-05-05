@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:vnheritage/common/routes/names.dart';
 
 class HomeController extends GetxController {
   late ScrollController scrollController;
@@ -16,5 +17,9 @@ class HomeController extends GetxController {
   bool isSliverAppBarExpandedCheck () {
     return scrollController.hasClients &&
         scrollController.offset > 350;
+  }
+
+  void HandleHeritageDetailsPage (){
+    Get.toNamed(AppRoutes.HERITAGEDETAILS);
   }
 }
