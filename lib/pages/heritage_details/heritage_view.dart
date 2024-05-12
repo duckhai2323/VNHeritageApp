@@ -52,6 +52,30 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
                     )
                   ),
 
+                  Positioned(
+                    right: 25,
+                    top: 125,
+                    child: Container(
+                      padding: EdgeInsets.only(bottom: 1,top: 1),
+                      height: 25,
+                      width: 45,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.6),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '2/5',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
                   const Positioned(
                     top: 25,
                     right: 25,

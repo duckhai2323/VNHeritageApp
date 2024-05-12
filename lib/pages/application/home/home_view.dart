@@ -15,6 +15,13 @@ class HomePage extends GetView<HomeController>{
 
   @override
   Widget build(BuildContext context) {
+    List<ItemCategory> listCategory = <ItemCategory>[];
+    listCategory.add(ItemCategory("Di tích", const Icon(Icons.temple_buddhist_rounded, size: 30, color: Colors.white,),));
+    listCategory.add(ItemCategory("Sự kiện", const Icon(Icons.home_repair_service, size: 30, color: Colors.white,),));
+    listCategory.add(ItemCategory("Khách sạn", const Icon(Icons.business_outlined, size: 30, color: Colors.white,),));
+    listCategory.add(ItemCategory("Nhà hàng", const Icon(Icons.storefront_rounded, size: 30, color: Colors.white,),));
+    listCategory.add(ItemCategory("Blog", const Icon(Icons.my_library_books_rounded, size: 30, color: Colors.white,),));
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: CustomScrollView(
@@ -123,45 +130,19 @@ class HomePage extends GetView<HomeController>{
                     child: Container(
                       height: MediaQuery.of(context).size.height*1/3,
                       width: MediaQuery.of(context).size.width,
-                      child: PageView(
-                        children: [
-                          Container(
+                      child: PageView.builder(
+                        itemCount: controller.listHeritages[0].images.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return  Container(
                             height: MediaQuery.of(context).size.height*1/3,
-                            decoration: const BoxDecoration(
+                            decoration:BoxDecoration(
                                 image: DecorationImage(
-                                    image: NetworkImage('https://nhiepanhhanoi.org.vn/wp-content/uploads/2020/11/6-640x455.jpg'),
+                                    image: NetworkImage(controller.listHeritages[0].images[index]),
                                     fit: BoxFit.fill
                                 )
                             ),
-                          ),
-                          Container(
-                            height: MediaQuery.of(context).size.height*1/3,
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage('https://nhiepanhhanoi.org.vn/wp-content/uploads/2020/11/6-640x455.jpg'),
-                                    fit: BoxFit.fill
-                                )
-                            ),
-                          ),
-                          Container(
-                            height: MediaQuery.of(context).size.height*1/3,
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage('https://nhiepanhhanoi.org.vn/wp-content/uploads/2020/11/6-640x455.jpg'),
-                                    fit: BoxFit.fill
-                                )
-                            ),
-                          ),
-                          Container(
-                            height: MediaQuery.of(context).size.height*1/3,
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage('https://nhiepanhhanoi.org.vn/wp-content/uploads/2020/11/6-640x455.jpg'),
-                                    fit: BoxFit.fill
-                                )
-                            ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -298,29 +279,27 @@ class HomePage extends GetView<HomeController>{
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: SizedBox(
-                height: 110,
+                height: 100,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 6,
+                  itemCount: listCategory.length,
                   shrinkWrap: true,
                   itemExtent: 100,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       margin: EdgeInsets.only(left: 15),
-                      width: 100,
-                      height: 100,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            height: 65,
-                            width: 65,
+                            height: 58,
+                            width: 58,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(65/2),
+                              borderRadius: BorderRadius.circular(29),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.2),
@@ -330,20 +309,20 @@ class HomePage extends GetView<HomeController>{
                                   )
                                 ]
                             ),
-                            child: const Center(
+                            child: Center(
                               child: CircleAvatar(
-                                radius: 31,
-                                backgroundColor: AppColors.iconHomeColor1,
-                                child: Icon(Icons.store, size: 45, color: Colors.white,),
+                                radius: 28,
+                                backgroundColor: AppColors.bottomNaviColor,
+                                child: listCategory[index].icon,
                               ),
                             )
                           ),
 
                           const SizedBox(height: 5,),
 
-                          const Text(
-                            'Di tích',
-                            style: TextStyle(
+                          Text(
+                            listCategory[index].title,
+                            style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 15,
                               color: AppColors.placeHolderColor
@@ -441,14 +420,16 @@ class HomePage extends GetView<HomeController>{
               child: Container(
                 height: 185,
                 padding: const EdgeInsets.only(left: 15,top: 10,bottom: 10),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 5,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext contex, int index) {
-                    return InkWell(onTap: (){ controller.HandleHeritageDetailsPage();},child: HeritageItem(context));
-                  },
+                child: Obx(
+                ()=>ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: controller.listHeritages.length,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext contex, int index) {
+                      return InkWell(onTap: (){ controller.HandleHeritageDetailsPage();},child: HeritageItem(context, controller.listHeritages[index].title??"", controller.listHeritages[index].images[0], controller.listHeritages[index].evaluation??""));
+                    },
+                  ),
                 ),
               ),
             ),
@@ -587,6 +568,7 @@ class HomePage extends GetView<HomeController>{
                     width: MediaQuery.of(context).size.width/2,
                     padding: EdgeInsets.only(left: 15,right: 5),
                     child: ListView.builder(
+                      padding: EdgeInsets.only(top: 5),
                       itemCount: 5,
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -600,6 +582,7 @@ class HomePage extends GetView<HomeController>{
                     width: MediaQuery.of(context).size.width/2,
                     padding: EdgeInsets.only(right: 15,left: 5),
                     child: ListView.builder(
+                      padding: EdgeInsets.only(top: 5),
                       itemCount: 5,
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -620,4 +603,10 @@ class HomePage extends GetView<HomeController>{
       ),
     );
   }
+}
+
+class ItemCategory {
+  final String title;
+  final Icon icon;
+  ItemCategory(this.title, this.icon);
 }

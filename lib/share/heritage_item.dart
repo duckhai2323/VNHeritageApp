@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 import '../common/colors/app_colors.dart';
 
-Widget HeritageItem (BuildContext context) {
+Widget HeritageItem (BuildContext context,String title, String image, String evaluation) {
   return Container(
     margin: const EdgeInsets.only(right: 10),
-    height: 150,
+    height: 160,
     width: 165,
     decoration: BoxDecoration(
         color: Colors.white,
@@ -27,13 +27,13 @@ Widget HeritageItem (BuildContext context) {
       children: [
         Container(
           height: 80,
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10),
                 topRight: Radius.circular(10),
               ),
               image: DecorationImage(
-                image: NetworkImage('https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2017/07/ho-hoan-kiem-3.jpg'),
+                image: NetworkImage(image),
                 fit: BoxFit.cover,
               )
           ),
@@ -48,12 +48,13 @@ Widget HeritageItem (BuildContext context) {
           ),
         ),
 
-        const Padding(
-          padding: EdgeInsets.only(left: 10, top: 5),
+        Container(
+          padding: EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 3),
+          height: 50,
           child: Text(
-            'Hồ Hoàn Kiếm',
-            style: TextStyle(
-              fontSize: 16,
+            title,
+            style: const TextStyle(
+              fontSize: 15,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -78,16 +79,16 @@ Widget HeritageItem (BuildContext context) {
               child:RichText(
                 text: const TextSpan(
                   children: <TextSpan>[
-                    TextSpan(text: '4,5', style: TextStyle(color: AppColors.placeHolderColor, fontWeight: FontWeight.w500, fontSize: 14)),
-                    TextSpan(text: '/5', style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500, fontSize: 13)),
+                    TextSpan(text: '4,5', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 14)),
+                    TextSpan(text: '/5', style: TextStyle(color:AppColors.placeHolderColor ,fontWeight: FontWeight.w500, fontSize: 13)),
                   ],
                 ),
               ),
             ),
 
-            const Text(
-              '200 Đánh giá',
-              style: TextStyle(
+            Text(
+              '$evaluation Đánh giá',
+              style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 14,
                   color: AppColors.placeHolderColor

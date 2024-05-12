@@ -8,7 +8,7 @@ import '../pages/application/home/home_controller.dart';
  Widget BlogItem (BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width/2,
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: Colors.white,

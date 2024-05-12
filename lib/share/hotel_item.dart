@@ -38,15 +38,6 @@ Widget HotelItem (BuildContext context) {
                 fit: BoxFit.cover,
               )
           ),
-          child: const Stack(
-            children: [
-              Positioned(
-                top: 10,
-                right: 10,
-                child: Icon(CupertinoIcons.heart,color: Colors.white,size: 25,),
-              ),
-            ],
-          ),
         ),
 
         const Padding(
@@ -54,7 +45,7 @@ Widget HotelItem (BuildContext context) {
           child: Text(
             'Hồ Hoàn Kiếm',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: FontWeight.w600,
             ),
           ),
