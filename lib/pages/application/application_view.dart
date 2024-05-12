@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:vnheritage/pages/application/application_controller.dart';
+import 'package:vnheritage/pages/application/blog/blog_view.dart';
+import 'package:vnheritage/pages/application/favorite/favorite_view.dart';
 import 'package:vnheritage/pages/application/home/home_view.dart';
 
 import '../../common/colors/app_colors.dart';
@@ -19,8 +21,8 @@ class ApplicationPage extends GetView<ApplicationController>{
         },
         children: [
           HomePage(),
-          Center(child: Text('yêu thích'),),
-          Center(child: Text('khoảnh khắc'),),
+          FavoritePage(),
+          BlogPage(),
           Center(child: Text('cá nhân'),),
         ],
       ),

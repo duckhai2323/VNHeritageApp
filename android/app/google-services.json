@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "355313154575",
+    "project_id": "vnheriatge",
+    "storage_bucket": "vnheriatge.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355313154575:android:89e8b0e80cac2daa24017a",
+        "android_client_info": {
+          "package_name": "com.example.vnheritage"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC93SrzISeinXLpqMCoIB8KLRMzeYeOhh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

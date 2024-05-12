@@ -4,11 +4,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 
 import 'package:vnheritage/pages/heritage_details/heritage_controller.dart';
-import 'package:vnheritage/share/hotel_item.dart';
 import 'package:vnheritage/share/hotel_item_horizon.dart';
 
 import '../../common/colors/app_colors.dart';
@@ -28,7 +26,7 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height*1/3+50,
+              height: MediaQuery.of(context).size.height*1/3+100,
               //color: Colors.blue,
               child: Stack(
                 children: [
@@ -37,31 +35,39 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
                     left: 0,
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height*1/4,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage('https://hnm.1cdn.vn/2020/06/10/nhipsonghanoi.hanoimoi.com.vn-uploads-images-tuandiep-2020-06-09-_1hphong.jpg'),
-                          fit: BoxFit.cover,
-                        )
+                      height: MediaQuery.of(context).size.height*1/4+10,
+                      child: PageView.builder(
+                        itemCount: 5,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage('https://hnm.1cdn.vn/2020/06/10/nhipsonghanoi.hanoimoi.com.vn-uploads-images-tuandiep-2020-06-09-_1hphong.jpg'),
+                                  fit: BoxFit.cover,
+                                )
+                            ),
+                          );
+                        },
                       ),
-                    ),
+                    )
                   ),
 
-                  Positioned(
+                  const Positioned(
                     top: 25,
                     right: 25,
                     child: Icon(CupertinoIcons.heart,size: 30,color: Colors.white,),
                   ),
 
-                  Positioned(
+                  const Positioned(
                     top: 25,
                     left: 25,
                     child: Icon(Icons.arrow_back_ios,size: 30,color: Colors.white,),
                   ),
 
+
                   Positioned(
                     left: 0,
-                    bottom: 40,
+                    bottom: 75,
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height*1/7,
@@ -78,7 +84,7 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
                   Positioned(
                     left: 15,
                     right: 15,
-                    bottom: 10,
+                    bottom: 25,
                     child: Container(
                       width: MediaQuery.of(context).size.width - 30,
                       padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
@@ -187,8 +193,9 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
                 ],
               ),
             ),
+
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+              margin: EdgeInsets.only(left: 15,right:15,bottom: 10),
               width: MediaQuery.of(context).size.width - 30,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(13),
@@ -327,23 +334,40 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
                     ),
                   ),
 
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: GridView.builder(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      scrollDirection: Axis.vertical,
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // Number of columns in the grid
-                        crossAxisSpacing: 10, // Spacing between columns
-                        mainAxisSpacing: 10,
-                        mainAxisExtent: 265,// Spacing between rows
-                      ),
-                      itemCount: 4,
-                      itemBuilder: (BuildContext context, int index) {
-                        return BlogItem(context);
-                      },
+                  Container(
+                    width: MediaQuery.of(context).size.width-30,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width/2-15,
+                          padding: EdgeInsets.only(left: 10,right: 5),
+                          child: ListView.builder(
+                            padding: EdgeInsets.only(top: 15),
+                            itemCount: 2,
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, int index) {
+                              return InkWell(onTap: (){controller.HandleReadBlog();},child:  BlogItem(context));
+                            },
+                          ),
+                        ),
+
+                        Container(
+                          width: MediaQuery.of(context).size.width/2-15,
+                          padding: EdgeInsets.only(right: 10,left: 5),
+                          child: ListView.builder(
+                            padding: EdgeInsets.only(top: 15),
+                            itemCount: 2,
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, int index) {
+                              return InkWell(onTap: (){controller.HandleReadBlog();},child: BlogItem(context));
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

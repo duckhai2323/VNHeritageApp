@@ -576,20 +576,39 @@ class HomePage extends GetView<HomeController>{
               )
           ),
 
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            sliver: SliverGrid(
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: MediaQuery.of(context).size.width/2,
-                mainAxisSpacing: 15,
-                crossAxisSpacing: 15,
-                childAspectRatio: 0.7,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                  return BlogItem(context);
-                },
-                childCount: 6,
+          SliverToBoxAdapter(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width/2,
+                    padding: EdgeInsets.only(left: 15,right: 5),
+                    child: ListView.builder(
+                      itemCount: 5,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        return BlogItem(context);
+                      },
+                    ),
+                  ),
+
+                  Container(
+                    width: MediaQuery.of(context).size.width/2,
+                    padding: EdgeInsets.only(right: 15,left: 5),
+                    child: ListView.builder(
+                      itemCount: 5,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        return BlogItem(context);
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

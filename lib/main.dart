@@ -1,10 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'common/routes/names.dart';
 import 'common/routes/pages.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  FirebaseOptions firebaseOptions = const FirebaseOptions(
+      apiKey: 'AIzaSyC93SrzISeinXLpqMCoIB8KLRMzeYeOhh8',
+      appId: '1:355313154575:android:89e8b0e80cac2daa24017a',
+      messagingSenderId: '355313154575',
+      projectId: 'vnheriatge'
+  );
+  await Firebase.initializeApp(options:firebaseOptions);
   runApp(const MyApp());
 }
 

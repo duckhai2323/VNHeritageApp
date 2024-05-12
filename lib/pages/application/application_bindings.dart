@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:vnheritage/pages/application/blog/blog_controller.dart';
 import 'package:vnheritage/pages/application/home/home_controller.dart';
 
 import 'application_controller.dart';
@@ -9,5 +10,6 @@ class ApplicationBindings extends Bindings {
   void dependencies() {
     Get.lazyPut(() => ApplicationController());
     Get.lazyPut(() => HomeController());
+    Get.lazyPut(() => BlogController());
   }
 }
