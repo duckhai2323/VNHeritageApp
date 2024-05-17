@@ -3,28 +3,25 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:vnheritage/common/colors/app_colors.dart';
 import 'package:vnheritage/pages/application/home/home_controller.dart';
+import 'package:vnheritage/pages/application/home/item_blog.dart';
 import 'package:vnheritage/share/blog_item.dart';
 import 'package:vnheritage/share/food_item.dart';
 import 'package:vnheritage/share/heritage_item.dart';
 
 import '../../../share/hotel_item.dart';
+import '../application_controller.dart';
 
 class HomePage extends GetView<HomeController>{
 
   @override
   Widget build(BuildContext context) {
-    List<ItemCategory> listCategory = <ItemCategory>[];
-    listCategory.add(ItemCategory("Di tích", const Icon(Icons.temple_buddhist_rounded, size: 30, color: Colors.white,),));
-    listCategory.add(ItemCategory("Sự kiện", const Icon(Icons.home_repair_service, size: 30, color: Colors.white,),));
-    listCategory.add(ItemCategory("Khách sạn", const Icon(Icons.business_outlined, size: 30, color: Colors.white,),));
-    listCategory.add(ItemCategory("Nhà hàng", const Icon(Icons.storefront_rounded, size: 30, color: Colors.white,),));
-    listCategory.add(ItemCategory("Blog", const Icon(Icons.my_library_books_rounded, size: 30, color: Colors.white,),));
-
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      body: CustomScrollView(
+      body:Obx(()=>controller.listHeritages.isNotEmpty? CustomScrollView(
         controller: controller.scrollController,
         slivers: [
           // Obx(() =>SliverAppBar(
@@ -162,39 +159,39 @@ class HomePage extends GetView<HomeController>{
                     ),
                   ),
 
-                  Positioned(
-                    top: 20,
-                    left: 50,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width-100,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Icon(Icons.search, size: 30, color: AppColors.bottomNaviColor,),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Tỉnh thành, điểm đến, điểm...',
-                            style: TextStyle(
-                              color: AppColors.placeHolderColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ),
+                  // Positioned(
+                  //     top: 20,
+                  //     left: 50,
+                  //     child: Container(
+                  //       width: MediaQuery.of(context).size.width-100,
+                  //       height: 40,
+                  //       decoration: BoxDecoration(
+                  //         color: Colors.white,
+                  //         borderRadius: BorderRadius.circular(8),
+                  //       ),
+                  //       child: const Row(
+                  //         mainAxisAlignment: MainAxisAlignment.start,
+                  //         mainAxisSize: MainAxisSize.max,
+                  //         children: [
+                  //           SizedBox(
+                  //             width: 10,
+                  //           ),
+                  //           Icon(Icons.search, size: 30, color: AppColors.bottomNaviColor,),
+                  //           SizedBox(
+                  //             width: 5,
+                  //           ),
+                  //           Text(
+                  //             'Tỉnh thành, điểm đến, điểm...',
+                  //             style: TextStyle(
+                  //               color: AppColors.placeHolderColor,
+                  //               fontSize: 18,
+                  //               fontWeight: FontWeight.w500,
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     )
+                  // ),
 
                   Positioned(
                     bottom: 10,
@@ -203,8 +200,8 @@ class HomePage extends GetView<HomeController>{
                       width: MediaQuery.of(context).size.width-80,
                       height: 48,
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.2),
@@ -228,7 +225,7 @@ class HomePage extends GetView<HomeController>{
                               color: AppColors.bottomNaviColor,
                             ),
                           ),
-                          const SizedBox(width: 20),
+                          const SizedBox(width: 10),
                           RichText(
                             text: const TextSpan(
                               children: <TextSpan>[
@@ -265,9 +262,9 @@ class HomePage extends GetView<HomeController>{
                     Text(
                       'Xem tất cả',
                       style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.bottomNaviColor
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.bottomNaviColor
                       ),
                     ),
                   ],
@@ -283,7 +280,7 @@ class HomePage extends GetView<HomeController>{
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: listCategory.length,
+                  itemCount: controller.listCategory.length,
                   shrinkWrap: true,
                   itemExtent: 100,
                   itemBuilder: (BuildContext context, int index) {
@@ -295,37 +292,37 @@ class HomePage extends GetView<HomeController>{
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            height: 58,
-                            width: 58,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(29),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: 0.25,
-                                    blurRadius: 5,
-                                    offset: Offset(0,1),
-                                  )
-                                ]
-                            ),
-                            child: Center(
-                              child: CircleAvatar(
-                                radius: 28,
-                                backgroundColor: AppColors.bottomNaviColor,
-                                child: listCategory[index].icon,
+                              height: 56,
+                              width: 56,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(29),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 0.25,
+                                      blurRadius: 5,
+                                      offset: Offset(0,1),
+                                    )
+                                  ]
                               ),
-                            )
+                              child: Center(
+                                child: CircleAvatar(
+                                  radius: 26,
+                                  backgroundColor: AppColors.bottomNaviColor,
+                                  child: controller.listCategory[index].icon,
+                                ),
+                              )
                           ),
 
                           const SizedBox(height: 5,),
 
                           Text(
-                            listCategory[index].title,
+                            controller.listCategory[index].title,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
-                              color: AppColors.placeHolderColor
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                                color: AppColors.placeHolderColor
                             ),
                           ),
                         ],
@@ -383,7 +380,7 @@ class HomePage extends GetView<HomeController>{
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                           decoration: BoxDecoration(
-                              color: Colors.white,
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(3),
                             border: Border.all(
                               width: 1,
@@ -393,8 +390,8 @@ class HomePage extends GetView<HomeController>{
                           child: const Text(
                             'Sự kiện tổ chức',
                             style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
                               color: Color.fromRGBO(102, 102, 102, 1),
                             ),
                           ),
@@ -421,13 +418,24 @@ class HomePage extends GetView<HomeController>{
                 height: 185,
                 padding: const EdgeInsets.only(left: 15,top: 10,bottom: 10),
                 child: Obx(
-                ()=>ListView.builder(
+                      ()=>ListView.builder(
                     scrollDirection: Axis.horizontal,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: controller.listHeritages.length,
+                    itemCount: controller.listHeritages.isNotEmpty?controller.listHeritages.length:0,
                     shrinkWrap: true,
                     itemBuilder: (BuildContext contex, int index) {
-                      return InkWell(onTap: (){ controller.HandleHeritageDetailsPage();},child: HeritageItem(context, controller.listHeritages[index].title??"", controller.listHeritages[index].images[0], controller.listHeritages[index].evaluation??""));
+                      return InkWell(
+                          onTap: (){
+                            controller.HandleHeritageDetailsPage(controller.listHeritages.isNotEmpty?controller.listHeritages[index].id.toString():"");},
+                          child: HeritageItem(
+                              context,
+                              index,
+                              controller.listHeritages.isNotEmpty?controller.listHeritages[index].title??"":"",
+                              controller.listHeritages.isNotEmpty?controller.listHeritages[index].images[0]:"",
+                              controller.listHeritages.isNotEmpty?controller.listHeritages[index].evaluation??"":"",
+                              controller.listHeritages[index].userlike.contains(ApplicationController.user_id) ? const Icon(CupertinoIcons.heart_solid,color: Colors.pink,size: 25):Icon(CupertinoIcons.heart,color: Colors.white,size: 25),
+                          )
+                      );
                     },
                   ),
                 ),
@@ -435,56 +443,56 @@ class HomePage extends GetView<HomeController>{
             ),
           ),
 
+          // SliverToBoxAdapter(
+          //     child: Container(
+          //       margin: EdgeInsets.only(left: 15, top: 10,right: 15),
+          //       child: const Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         mainAxisSize: MainAxisSize.max,
+          //         children: [
+          //           Text(
+          //             'Khách sạn',
+          //             style: TextStyle(
+          //               fontSize: 18,
+          //               fontWeight: FontWeight.bold,
+          //             ),
+          //           ),
+          //
+          //           Text(
+          //             'Xem tất cả',
+          //             style: TextStyle(
+          //                 fontSize: 16,
+          //                 fontWeight: FontWeight.w500,
+          //                 color: AppColors.bottomNaviColor
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     )
+          // ),
+          //
+          // SliverToBoxAdapter(
+          //   child: SingleChildScrollView(
+          //     scrollDirection: Axis.horizontal,
+          //     child: Container(
+          //       height: 185,
+          //       padding: const EdgeInsets.only(left: 15,top: 10,bottom: 10),
+          //       child: ListView.builder(
+          //         scrollDirection: Axis.horizontal,
+          //         physics: const NeverScrollableScrollPhysics(),
+          //         itemCount: 5,
+          //         shrinkWrap: true,
+          //         itemBuilder: (BuildContext contex, int index) {
+          //           return HotelItem(contex);
+          //         },
+          //       ),
+          //     ),
+          //   ),
+          // ),
+
           SliverToBoxAdapter(
               child: Container(
-                margin: EdgeInsets.only(left: 15, top: 10,right: 15),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      'Khách sạn',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-                    Text(
-                      'Xem tất cả',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.bottomNaviColor
-                      ),
-                    ),
-                  ],
-                ),
-              )
-          ),
-
-          SliverToBoxAdapter(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                height: 185,
-                padding: const EdgeInsets.only(left: 15,top: 10,bottom: 10),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 5,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext contex, int index) {
-                    return HotelItem(contex);
-                  },
-                ),
-              ),
-            ),
-          ),
-
-          SliverToBoxAdapter(
-              child: Container(
-                margin: EdgeInsets.only(left: 15, top: 10,right: 15),
+                margin: const EdgeInsets.only(left: 15, top: 10,right: 15),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
@@ -564,31 +572,55 @@ class HomePage extends GetView<HomeController>{
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width/2,
-                    padding: EdgeInsets.only(left: 15,right: 5),
-                    child: ListView.builder(
-                      padding: EdgeInsets.only(top: 5),
-                      itemCount: 5,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return BlogItem(context);
-                      },
+                  Obx(
+                    ()=> Container(
+                      width: MediaQuery.of(context).size.width/2,
+                      padding: const EdgeInsets.only(left: 15,right: 5),
+                      child: ListView.builder(
+                        padding: const EdgeInsets.only(top: 5),
+                        itemCount: controller.listBlog1.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return InkWell(
+                            onTap: (){
+                              controller.HandleReadBLog(controller.listBlog1[index].id);
+                            },
+                            child: ItemBlogHome(
+                                controller.listBlog1[index].image,
+                                controller.listBlog1[index].title,
+                                controller.listBlog1[index].user_image,
+                                controller.listBlog1[index].user_name,
+                                controller.listBlog1[index].userLike),
+                          );
+                        },
+                      ),
                     ),
                   ),
 
-                  Container(
-                    width: MediaQuery.of(context).size.width/2,
-                    padding: EdgeInsets.only(right: 15,left: 5),
-                    child: ListView.builder(
-                      padding: EdgeInsets.only(top: 5),
-                      itemCount: 5,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return BlogItem(context);
-                      },
+                  Obx(
+                    ()=> Container(
+                      width: MediaQuery.of(context).size.width/2,
+                      padding: const EdgeInsets.only(right: 15,left: 5),
+                      child: ListView.builder(
+                        padding: const EdgeInsets.only(top: 5),
+                        itemCount: controller.listBlog2.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return InkWell(
+                            onTap: (){
+                              controller.HandleReadBLog(controller.listBlog2[index].id);
+                            },
+                            child: ItemBlogHome(
+                                controller.listBlog2[index].image,
+                                controller.listBlog2[index].title,
+                                controller.listBlog2[index].user_image,
+                                controller.listBlog2[index].user_name,
+                                controller.listBlog2[index].userLike),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
@@ -596,17 +628,11 @@ class HomePage extends GetView<HomeController>{
             ),
           ),
 
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: SizedBox(height: 50,),
           ),
         ],
-      ),
+      ):Container()),
     );
   }
-}
-
-class ItemCategory {
-  final String title;
-  final Icon icon;
-  ItemCategory(this.title, this.icon);
 }

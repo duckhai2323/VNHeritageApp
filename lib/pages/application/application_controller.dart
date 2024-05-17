@@ -5,10 +5,9 @@ import 'package:get/get.dart';
 import '../../common/colors/app_colors.dart';
 
 class ApplicationController extends GetxController {
-  static late String id;
-  static late String image;
-  static late String username;
-  final position = ''.obs;
+  static late String user_id;
+  static late String user_image;
+  static late String user_name;
   ApplicationController();
   final state = 0.obs;
   late final PageController pageController;
@@ -18,10 +17,9 @@ class ApplicationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    id = Get.parameters['id']??"";
-    image = Get.parameters['image']??"";
-    username = Get.parameters['username']??"";
-    position.value = Get.parameters['position']??"";
+    user_id = Get.parameters['user_id']??"";
+    user_image = Get.parameters['user_image']??"";
+    user_name = Get.parameters['user_name']??"";
     bottomTab = <BottomNavigationBarItem> [
       const BottomNavigationBarItem(
         icon: Icon(
