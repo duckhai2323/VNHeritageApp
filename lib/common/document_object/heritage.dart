@@ -9,8 +9,9 @@ class Heritage {
   final String? address;
   final String? province;
   final String? evaluation;
+  final List<String> userlike;
 
-  Heritage(this.id, this.title, this.description, this.images, this.open,this.address,this.province,this.evaluation);
+  Heritage(this.id, this.title, this.description, this.images, this.open,this.address,this.province,this.evaluation,this.userlike);
 
   factory Heritage.fromFirestore(DocumentSnapshot<Map<String, dynamic>> snapshot,
       SnapshotOptions? options){
@@ -24,6 +25,7 @@ class Heritage {
       data?['address'] ?? "",
       data?['province'] ?? "",
       data?['evaluation'] ?? "",
+      List<String>.from(data?['userlike'] ?? []),
     );
   }
 
@@ -37,6 +39,7 @@ class Heritage {
       'last_username':address,
       'last_comment':province,
       'timestamp':evaluation,
+      'userlike': List<String>.from(userlike ?? []),
     };
   }
 }

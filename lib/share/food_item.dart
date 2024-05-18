@@ -39,10 +39,13 @@ Widget FoodItem (BuildContext context) {
           ),
         ),
 
-        const Padding(
-          padding: EdgeInsets.only(left: 10, top: 5),
+        Container(
+          margin: EdgeInsets.only(top: 8,left: 10,right: 10),
+          height: 50,
           child: Text(
-            'Món chả phố cổ',
+            'Món chả phố cổ rat la ngon kkkkk chung ta ko co nhieu',
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w600,
@@ -69,8 +72,8 @@ Widget FoodItem (BuildContext context) {
               child:RichText(
                 text: const TextSpan(
                   children: <TextSpan>[
-                    TextSpan(text: '4,5', style: TextStyle(color: AppColors.placeHolderColor, fontWeight: FontWeight.w500, fontSize: 14)),
-                    TextSpan(text: '/5', style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500, fontSize: 13)),
+                    TextSpan(text: '4,5', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 14)),
+                    TextSpan(text: '/5', style: TextStyle(color: AppColors.placeHolderColor,fontWeight: FontWeight.w500, fontSize: 13)),
                   ],
                 ),
               ),
@@ -85,20 +88,6 @@ Widget FoodItem (BuildContext context) {
               ),
             ),
           ],
-        ),
-
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Text(
-            'Một món ăn bình dị và thân thương ngon vl',
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: AppColors.bottomNaviColor,
-            ),
-          ),
         ),
       ],
     ),
