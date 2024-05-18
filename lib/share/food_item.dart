@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../common/colors/app_colors.dart';
 
-Widget FoodItem (BuildContext context) {
+Widget FoodItem (BuildContext context,String image, String name, String evaluation,String restaurant) {
   return Container(
     margin: const EdgeInsets.only(right: 10),
     height: 150,
@@ -16,7 +16,7 @@ Widget FoodItem (BuildContext context) {
             color: Colors.grey.withOpacity(0.2),
             spreadRadius: 0.15,
             blurRadius: 2,
-            offset: Offset(0,2),
+            offset: const Offset(0,2),
           )
         ]
     ),
@@ -27,26 +27,26 @@ Widget FoodItem (BuildContext context) {
       children: [
         Container(
           height: 80,
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10),
                 topRight: Radius.circular(10),
               ),
               image: DecorationImage(
-                image: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHUyaa3uWoISLDsnNb664rmw-OiJj_63pdBn0aBNzfFw&s'),
+                image: NetworkImage(image),
                 fit: BoxFit.cover,
               )
           ),
         ),
 
         Container(
-          margin: EdgeInsets.only(top: 8,left: 10,right: 10),
+          margin: const EdgeInsets.only(top: 8,left: 10,right: 10),
           height: 50,
           child: Text(
-            'Món chả phố cổ rat la ngon kkkkk chung ta ko co nhieu',
+           name + ' - ' + restaurant,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w600,
             ),
@@ -79,9 +79,9 @@ Widget FoodItem (BuildContext context) {
               ),
             ),
 
-            const Text(
-              '200 Đánh giá',
-              style: TextStyle(
+            Text(
+              '$evaluation Đánh giá',
+              style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 14,
                   color: AppColors.placeHolderColor

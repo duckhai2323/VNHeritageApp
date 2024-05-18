@@ -8,6 +8,7 @@ import 'package:vnheritage/pages/application/home/item_blog.dart';
 
 import '../../../common/document_object/blog.dart';
 import '../../../common/document_object/favorite_item.dart';
+import '../../../common/document_object/food.dart';
 import '../../../common/document_object/user.dart';
 import '../application_controller.dart';
 import 'home_view.dart';
@@ -21,6 +22,7 @@ class HomeController extends GetxController {
   var clickEvent = true.obs;
   var listener;
   List<Heritage> listHeritages = <Heritage>[].obs;
+  List<Food> listFoods = <Food>[].obs;
 
   List<ItemCategory> listCategory = <ItemCategory>[].obs;
 
@@ -33,6 +35,7 @@ class HomeController extends GetxController {
     listCategory.add(ItemCategory("Blog", const Icon(Icons.my_library_books_rounded, size: 28, color: Colors.white,),));
     listCategory.add(ItemCategory("Khách sạn", const Icon(Icons.business_outlined, size: 28, color: Colors.white,),));
     GetListHeritage();
+    GetListFood();
     GetListBlogs();
     scrollController = ScrollController()
       ..addListener(() {
@@ -72,6 +75,40 @@ class HomeController extends GetxController {
     });
   }
 
+  Future<void> GetListFood () async {
+    var data = await db.collection("foods").withConverter(
+        fromFirestore: Food.fromFirestore,
+        toFirestore: (Food food, options) => food.toFirestore()
+    ).orderBy("timestamp",descending: false);
+    listFoods.clear();
+    listener = data.snapshots().listen((event) {
+      for(var change in event.docChanges){
+        switch (change.type){
+          case DocumentChangeType.added:
+            if(change.doc.data()!=null) {
+              listFoods.insert(0, change.doc.data()!);
+            }
+            break;
+          case DocumentChangeType.modified:
+            if(change.doc.data()!=null) {
+              Food food = change.doc.data()!;
+              for(int i = 0; i < listFoods.length; i++){
+                if(listFoods[i].id == food.id){
+                  listFoods.insert(i, food);
+                  listFoods.removeAt(i+1);
+                }
+              }
+            }
+            break;
+          case DocumentChangeType.removed:
+            break;
+        }
+      }
+    });
+  }
+
+
+
   bool isSliverAppBarExpandedCheck () {
     return scrollController.hasClients &&
         scrollController.offset > 350;
@@ -102,6 +139,8 @@ class HomeController extends GetxController {
       "userlike":List<String>.from(itemData.userlike ?? []),
     });
   }
+
+
 
   Future<void> GetListBlogs () async {
     var data = db.collection("blogs").withConverter(
@@ -153,8 +192,8 @@ class HomeController extends GetxController {
     clickEvent.value = !clickEvent.value;
   }
 
-  void HandleFoodDetail(){
-    Get.toNamed(AppRoutes.FOOD);
+  void HandleFoodDetail(String id){
+    Get.toNamed(AppRoutes.FOOD,parameters: {"id":id});
   }
 }
 

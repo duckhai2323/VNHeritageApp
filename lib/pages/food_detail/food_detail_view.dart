@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:vnheritage/pages/food_detail/food_detail_controller.dart';
 
@@ -13,6 +11,36 @@ class FoodDetailPage extends GetView<FoodDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: Container(
+        width: MediaQuery.sizeOf(context).width,
+        height: 70,
+        padding: const EdgeInsets.only(left: 15,right: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 3,
+              blurRadius: 2,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.mode_edit_rounded, color: AppColors.bottomNaviColor,size: 25,),
+            Text(
+              'Viết đánh giá',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+      ),
       backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Column(
@@ -465,6 +493,7 @@ class FoodDetailPage extends GetView<FoodDetailController> {
                                           image: NetworkImage('https://static.vinwonders.com/production/bun-cha-ha-noi-01.jpg'),
                                           fit: BoxFit.cover,
                                         )
+
                                       ),
                                     );
                                   },

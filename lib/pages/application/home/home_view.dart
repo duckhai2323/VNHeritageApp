@@ -545,16 +545,23 @@ class HomePage extends GetView<HomeController>{
               child: Container(
                 height: 190,
                 padding: const EdgeInsets.only(left: 15,top: 10,bottom: 10),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 5,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext contex, int index) {
-                    return InkWell(onTap:(){
-                      controller.HandleFoodDetail();
-                    },child: FoodItem(context));
-                  },
+                child: Obx(
+                    ()=> ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: controller.listFoods.length,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext contex, int index) {
+                      return InkWell(onTap:(){
+                        controller.HandleFoodDetail(controller.listFoods[index].id??"");
+                      },child: FoodItem(
+                          context,
+                          controller.listFoods[index].images[0],
+                          controller.listFoods[index].name??"",
+                          controller.listFoods[index].evaluation??"",
+                          controller.listFoods[index].restaurant??""));
+                    },
+                  ),
                 ),
               ),
             ),
