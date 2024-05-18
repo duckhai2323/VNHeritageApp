@@ -1,15 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:vnheritage/common/document_object/comment_food.dart';
+import 'package:vnheritage/common/routes/names.dart';
 
 import '../../common/document_object/food.dart';
 
 class FoodDetailController extends GetxController {
   final db = FirebaseFirestore.instance;
+  final listComment = <CommentFood>[].obs;
   PageController pageController = PageController();
   var listener;
   final id= ''.obs;
   List<Food> listFoods = <Food>[].obs;
+
 
   var currPage = 1.obs;
   void HandlePage(int index) {
@@ -21,6 +25,7 @@ class FoodDetailController extends GetxController {
     super.onInit();
     id.value = Get.parameters['id']??"";
     GetData();
+    GetComment();
   }
 
   Future<void> GetData() async {
@@ -34,6 +39,38 @@ class FoodDetailController extends GetxController {
     if(data.docs.isNotEmpty){
       listFoods.add(data.docs[0].data());
     }
+  }
+
+  Future<void> GetComment() async {
+    await Future.delayed(const Duration(seconds: 1));
+    final data = await db.collection("food_comments").withConverter(
+        fromFirestore: CommentFood.fromFirestore,
+        toFirestore: (CommentFood comment, options) => comment.toFirestore()
+    ).orderBy("timestamp",descending: false).where("id_blog",isEqualTo: id.value);
+    listComment.clear();
+    listener = data.snapshots().listen((event) {
+      for(var change in event.docChanges){
+        switch (change.type){
+          case DocumentChangeType.added:
+            if(change.doc.data()!=null) {
+              listComment.insert(0, change.doc.data()!);
+            }
+            break;
+          case DocumentChangeType.modified:
+            if(change.doc.data()!=null) {
+              listComment.insert(0, change.doc.data()!);
+            }
+            break;
+          case DocumentChangeType.removed:
+            break;
+        }
+      }
+    });
+  }
+
+
+  void HandleComment() {
+    Get.toNamed(AppRoutes.COMMENTFOOD, parameters: {'id':id.value, 'name':listFoods[0].name??""});
   }
 
 

@@ -19,7 +19,7 @@ class HomeController extends GetxController {
   final db = FirebaseFirestore.instance;
   List<ItemBlog> listBlog1 = <ItemBlog>[].obs;
   List<ItemBlog> listBlog2 = <ItemBlog>[].obs;
-  var clickEvent = true.obs;
+  var clickEvent = false.obs;
   var listener;
   List<Heritage> listHeritages = <Heritage>[].obs;
   List<Food> listFoods = <Food>[].obs;

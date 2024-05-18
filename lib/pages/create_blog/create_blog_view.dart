@@ -104,12 +104,17 @@ class CreateBlogPage extends GetView<CreateBlogController> {
                 width: MediaQuery.of(context).size.width,
                 height: controller.listImages.length <= 3? 130:260,
                 child: GridView.builder(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  physics: NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    mainAxisExtent: 115,
                   ),
                   itemCount: controller.listImages.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Image.file(File(controller.listImages[index].path),fit: BoxFit.cover);
+                    return ClipRRect(borderRadius: BorderRadius.circular(8),child: Image.file(File(controller.listImages[index].path),fit: BoxFit.cover));
                   },
                 ),
               ):InkWell(

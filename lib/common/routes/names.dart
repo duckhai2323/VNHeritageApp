@@ -8,4 +8,5 @@ class AppRoutes {
   static const CREATEBLOG = '/createblog';
   static const COMMENTBLOG = '/commentblog';
   static const FOOD = '/food';
+  static const COMMENTFOOD = '/commentfood';
 }

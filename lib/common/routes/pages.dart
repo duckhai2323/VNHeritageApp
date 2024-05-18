@@ -1,6 +1,8 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:vnheritage/pages/create_blog/create_blog_binding.dart';
 import 'package:vnheritage/pages/create_blog/create_blog_view.dart';
+import 'package:vnheritage/pages/food_detail/comment/comment_food-binding.dart';
+import 'package:vnheritage/pages/food_detail/comment/comment_food_view.dart';
 import 'package:vnheritage/pages/food_detail/food_detail_binding.dart';
 import 'package:vnheritage/pages/food_detail/food_detail_view.dart';
 import 'package:vnheritage/pages/heritage_details/heritage_binding.dart';
@@ -63,6 +65,11 @@ class AppPages {
         name: AppRoutes.FOOD,
         page: () => FoodDetailPage(),
         binding:  FoodDetailBinding()
+    ),
+    GetPage(
+        name: AppRoutes.COMMENTFOOD,
+        page: () => CommentFoodPage(),
+        binding:  CommentFoodBinding()
     ),
   ];
 }
