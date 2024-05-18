@@ -26,7 +26,7 @@ class CommentController extends GetxController{
     final data = await db.collection("comments").withConverter(
         fromFirestore: Comment.fromFirestore,
         toFirestore: (Comment comment, options) => comment.toFirestore()
-    ).orderBy("timestamp",descending: false).where("id_blog",isEqualTo: id);
+    ).where("id_blog",isEqualTo: id);
     listComment.clear();
     listener = data.snapshots().listen((event) {
       for(var change in event.docChanges){
@@ -57,6 +57,6 @@ class CommentController extends GetxController{
       "last_username":ApplicationController.user_name,
       "last_comment":commentStr,
     });
-    GetComment(id);
+    //GetComment(id);
   }
 }

@@ -24,8 +24,6 @@ class CommentFoodController extends GetxController {
   var clickSelect = false.obs;
   List<String> listUri = <String>[].obs;
 
-  final foodDetailController = Get.find<FoodDetailController>();
-
   @override
   void onInit() {
     super.onInit();
@@ -63,7 +61,6 @@ class CommentFoodController extends GetxController {
         toFirestore: (CommentFood commentFood, options)=>commentFood.toFirestore(),
       ).doc(documentId).set(data);
     }
-    foodDetailController.GetComment();
     Navigator.pop(context);
     Get.back();
   }

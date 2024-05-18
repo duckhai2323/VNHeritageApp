@@ -49,7 +49,7 @@ class FoodDetailPage extends GetView<FoodDetailController> {
         ),
       ),
       backgroundColor: AppColors.backgroundColor,
-      body: Obx(()=>controller.listFoods.isNotEmpty?SingleChildScrollView(
+      body: Obx(()=>controller.listFoods.isNotEmpty && controller.listComment.isNotEmpty && controller.listFoodRec.isNotEmpty?SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -527,8 +527,8 @@ class FoodDetailPage extends GetView<FoodDetailController> {
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(left: 15,top: 10,bottom: 10),
+            const Padding(
+              padding: EdgeInsets.only(left: 15,top: 10,bottom: 10),
               child: Text(
                 'Có thể bạn sẽ thích',
                 style: TextStyle(
@@ -542,125 +542,130 @@ class FoodDetailPage extends GetView<FoodDetailController> {
               width: MediaQuery.of(context).size.width-15,
               child: ListView.builder(
                 padding: EdgeInsets.only(top: 0),
-                itemCount: 5,
+                itemCount: controller.listFoodRec.length,
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 140,
-                    margin: const EdgeInsets.only(left: 15,bottom: 15),
-                    //padding: const EdgeInsets.only(bottom: 10,top: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 0.25,
-                          blurRadius: 2,
-                          offset: Offset(0,2),
-                        )
-                      ],
-                    ),
+                  return InkWell(
+                    onTap: (){
+                      controller.ClickItem(controller.listFoodRec[index].id??"");
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 140,
+                      margin: const EdgeInsets.only(left: 15,bottom: 15),
+                      //padding: const EdgeInsets.only(bottom: 10,top: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            spreadRadius: 0.25,
+                            blurRadius: 2,
+                            offset: Offset(0,2),
+                          )
+                        ],
+                      ),
 
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 140,
-                          width: 115,
-                          margin: EdgeInsets.only(right: 10),
-                          decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                              ),
-                              image: DecorationImage(
-                                image: NetworkImage('https://elitetour.com.vn/files/images/VinpearlResort%26SpaHaLong/bang-gia-phong-vinpearl-ha-long-6.jpg'),
-                                fit: BoxFit.cover,
-                              )
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 140,
+                            width: 115,
+                            margin: const EdgeInsets.only(right: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  bottomLeft: Radius.circular(10),
+                                ),
+                                image: DecorationImage(
+                                  image: NetworkImage(controller.listFoodRec[index].images[0]),
+                                  fit: BoxFit.cover,
+                                )
+                            ),
                           ),
-                        ),
 
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 10,),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width - 170,
-                              child: const Text(
-                                'Grand Mariiieee Ha Noi hfjbh sfusifh sfhisf sfhisf sf sfh sfhis fwueihf wufhiw whfi ',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 10,),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width - 170,
+                                child: Text(
+                                  controller.listFoodRec[index].name??"",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
 
-                            SizedBox(height: 5,),
+                              SizedBox(height: 5,),
 
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
-                                  margin: const EdgeInsets.only(right: 10,top: 3,bottom: 3),
-                                  decoration: const BoxDecoration(
-                                      color: AppColors.bottomNaviColor,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        bottomLeft: Radius.circular(10),
-                                        bottomRight: Radius.circular(10),
-                                      )
-                                  ),
-                                  child:RichText(
-                                    text: const TextSpan(
-                                      children: <TextSpan>[
-                                        TextSpan(text: '4,5', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 14)),
-                                        TextSpan(text: '/5', style: TextStyle(color: AppColors.placeHolderColor,fontWeight: FontWeight.w500, fontSize: 13)),
-                                      ],
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                                    margin: const EdgeInsets.only(right: 10,top: 3,bottom: 3),
+                                    decoration: const BoxDecoration(
+                                        color: AppColors.bottomNaviColor,
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          bottomLeft: Radius.circular(10),
+                                          bottomRight: Radius.circular(10),
+                                        )
+                                    ),
+                                    child:RichText(
+                                      text: const TextSpan(
+                                        children: <TextSpan>[
+                                          TextSpan(text: '4,5', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 14)),
+                                          TextSpan(text: '/5', style: TextStyle(color: AppColors.placeHolderColor,fontWeight: FontWeight.w500, fontSize: 13)),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
 
-                                const Text(
-                                  '200 Đánh giá',
+                                  Text(
+                                    '${controller.listFoodRec[index].evaluation} Đánh giá',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14,
+                                        color: AppColors.placeHolderColor
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              const SizedBox(height: 8,),
+
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(2),
+                                  color: AppColors.bgTextFeild,
+                                ),
+                                child: const Text(
+                                  'Tinh Hoa Ẩm Thực Việt',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14,
-                                      color: AppColors.placeHolderColor
+                                    fontSize: 14,
                                   ),
                                 ),
-                              ],
-                            ),
-
-                            SizedBox(height: 8,),
-
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 3),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(2),
-                                color: AppColors.bgTextFeild,
                               ),
-                              child: Text(
-                                'Tinh Hoa Ẩm Thực Việt',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
