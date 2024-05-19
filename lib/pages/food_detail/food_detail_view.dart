@@ -2,49 +2,53 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:intl/intl.dart';
 import 'package:vnheritage/pages/food_detail/food_detail_controller.dart';
 
 import '../../common/colors/app_colors.dart';
 import '../../share/hotel_item_horizon.dart';
 
 class FoodDetailPage extends GetView<FoodDetailController> {
-  const FoodDetailPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: Container(
-        width: MediaQuery.sizeOf(context).width,
-        height: 70,
-        padding: const EdgeInsets.only(left: 15, right: 10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 3,
-              blurRadius: 2,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.mode_edit_rounded,
-              color: AppColors.bottomNaviColor,
-              size: 25,
-            ),
-            Text(
-              'Viết đánh giá',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+      bottomSheet: InkWell(
+        onTap: () {
+          controller.HandleComment();
+        },
+        child: Container(
+          width: MediaQuery.sizeOf(context).width,
+          height: 70,
+          padding: const EdgeInsets.only(left: 15, right: 10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 3,
+                blurRadius: 2,
+                offset: const Offset(0, 2),
               ),
-            ),
-          ],
+            ],
+          ),
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.mode_edit_rounded,
+                color: AppColors.bottomNaviColor,
+                size: 25,
+              ),
+              Text(
+                'Viết đánh giá',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
       backgroundColor: AppColors.backgroundColor,
@@ -158,7 +162,7 @@ class FoodDetailPage extends GetView<FoodDetailController> {
                                     color: Colors.grey.withOpacity(0.3),
                                     spreadRadius: 0.25,
                                     blurRadius: 2,
-                                    offset: Offset(0, 2),
+                                    offset: const Offset(0, 2),
                                   )
                                 ],
                               ),
@@ -440,7 +444,9 @@ class FoodDetailPage extends GetView<FoodDetailController> {
                             width: MediaQuery.of(context).size.width - 58,
                             child: ListView.builder(
                               padding: const EdgeInsets.symmetric(vertical: 0),
-                              itemCount: 3,
+                              itemCount: controller.listComment.length >= 3
+                                  ? 3
+                                  : controller.listComment.length,
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (BuildContext context, int index) {
@@ -461,19 +467,23 @@ class FoodDetailPage extends GetView<FoodDetailController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Row(
+                                      Row(
                                         children: [
                                           CircleAvatar(
                                             radius: 16,
                                             backgroundImage: NetworkImage(
-                                                'https://vcdn1-dulich.vnecdn.net/2022/05/11/hoan-kiem-lake-7673-1613972680-1508-1652253984.jpg?w=0&h=0&q=100&dpr=1&fit=crop&s=2wB1cBTUcNKuk68nrG6LMQ'),
+                                                controller.listComment[index]
+                                                        .userimage ??
+                                                    ""),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 10,
                                           ),
                                           Text(
-                                            'Khai ne',
-                                            style: TextStyle(
+                                            controller.listComment[index]
+                                                    .username ??
+                                                "",
+                                            style: const TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500),
                                           ),
@@ -531,17 +541,21 @@ class FoodDetailPage extends GetView<FoodDetailController> {
                                           ),
                                         ],
                                       ),
-                                      const Text(
-                                        'bo rat ngon, huong vi rat ngot ngao nhu may co thieu nu moi lon, vay rat laf ngon va dam da toi se quay lai nhieu lan',
-                                        style: TextStyle(
+                                      Text(
+                                        controller.listComment[index].title ??
+                                            "",
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500),
                                       ),
                                       Container(
                                         width:
                                             MediaQuery.of(context).size.width,
-                                        //height: controller.listImages.length <= 3? 130:260,
-                                        height: 260,
+                                        height: controller.listComment[index]
+                                                    .images!.length <=
+                                                3
+                                            ? 135
+                                            : 260,
                                         //color:Colors.blue,
                                         child: GridView.builder(
                                           padding: const EdgeInsets.symmetric(
@@ -556,26 +570,33 @@ class FoodDetailPage extends GetView<FoodDetailController> {
                                             mainAxisExtent: 115,
                                           ),
                                           //itemCount: controller.listImages.length,
-                                          itemCount: 5,
+                                          itemCount: controller
+                                              .listComment[index]
+                                              .images!
+                                              .length,
                                           itemBuilder: (BuildContext context,
-                                              int index) {
+                                              int current) {
                                             return Container(
-                                              //margin: EdgeInsets.only(right: 10),
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(5),
-                                                  image: const DecorationImage(
+                                                  image: DecorationImage(
                                                     image: NetworkImage(
-                                                        'https://static.vinwonders.com/production/bun-cha-ha-noi-01.jpg'),
+                                                        controller
+                                                            .listComment[index]
+                                                            .images![current]),
                                                     fit: BoxFit.cover,
                                                   )),
                                             );
                                           },
                                         ),
                                       ),
-                                      const Text(
-                                        '20/5/2023',
-                                        style: TextStyle(
+                                      Text(
+                                        DateFormat.yMMMMd('en_US').format(
+                                            controller.listComment[index]
+                                                    .timestamp ??
+                                                DateTime.now()),
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             color: AppColors.placeHolderColor),
                                       ),
@@ -765,6 +786,9 @@ class FoodDetailPage extends GetView<FoodDetailController> {
                           );
                         },
                       ),
+                    ),
+                    const SizedBox(
+                      height: 90,
                     ),
                   ],
                 ),

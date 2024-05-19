@@ -5,4 +5,5 @@ class AppRoutes {
   static const HERITAGEDETAILS = '/heritagedetails';
   static const READBLOG = '/readblog';
   static const FOOD = '/food';
+  static const COMMENTFOOD = '/commentfood';
 }
