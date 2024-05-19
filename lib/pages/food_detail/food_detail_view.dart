@@ -399,7 +399,7 @@ class FoodDetailPage extends GetView<FoodDetailController> {
                                 children: [
                                   CircleAvatar(
                                     radius: 16,
-                                      backgroundImage: NetworkImage(controller.listComment[index].userimage??""),
+                                    backgroundImage: NetworkImage(controller.listComment[index].userimage??""),
                                   ),
 
                                   const SizedBox(width: 10,),

@@ -46,7 +46,7 @@ class SignInPage extends GetView<SignInController> {
                             color: Colors.white
                         ),
                       ),
-        
+
                       const Text(
                         'Chào mừng bạn đến với VNHeritage',
                         style: TextStyle(
@@ -55,7 +55,7 @@ class SignInPage extends GetView<SignInController> {
                           color: Colors.white,
                         ),
                       ),
-        
+
                       const Padding(
                         padding: EdgeInsets.only(top: 25, bottom: 15),
                         child: Text(
@@ -66,11 +66,11 @@ class SignInPage extends GetView<SignInController> {
                               color: Colors.white),
                         ),
                       ),
-        
+
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 30),
                         child: TextFormField(
-                         controller: controller.text1Controller,
+                          controller: controller.text1Controller,
                           obscureText: false,
                           keyboardType: TextInputType.emailAddress,
                           style: const TextStyle(
@@ -104,7 +104,7 @@ class SignInPage extends GetView<SignInController> {
                           ),
                         ),
                       ),
-        
+
                       Obx(
                             () => Padding(
                           padding: const EdgeInsets.symmetric(
@@ -128,7 +128,7 @@ class SignInPage extends GetView<SignInController> {
                                   fontFamily: "Roboto Regular",
                                   fontWeight: FontWeight.w600),
                               prefixIcon: const Icon(Icons.lock_outline,
-                                  size: 20, color: Colors.white,),
+                                size: 20, color: Colors.white,),
                               suffixIcon: InkWell(
                                 onTap: () {
                                   controller.ClickVisible();
@@ -159,7 +159,7 @@ class SignInPage extends GetView<SignInController> {
                       ),
 
                       SizedBox(height: 10,),
-        
+
                       InkWell(
                         onTap: () {
                           controller.HandleApplication(context);

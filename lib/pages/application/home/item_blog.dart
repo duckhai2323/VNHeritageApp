@@ -53,7 +53,7 @@ class ItemBlogHome extends GetView<HomeController> {
           Padding(
             padding: EdgeInsets.only(left: 10, top: 5, right: 5,bottom: 5),
             child: Text(
-             title,
+              title,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
@@ -104,9 +104,9 @@ class ItemBlogHome extends GetView<HomeController> {
                     Text(
                       userLike.toString(),
                       style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.placeHolderColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.placeHolderColor,
                       ),
                     ),
                   ],

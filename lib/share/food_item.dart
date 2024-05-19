@@ -43,7 +43,7 @@ Widget FoodItem (BuildContext context,String image, String name, String evaluati
           margin: const EdgeInsets.only(top: 8,left: 10,right: 10),
           height: 50,
           child: Text(
-           name + ' - ' + restaurant,
+            name + ' - ' + restaurant,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
             style: const TextStyle(

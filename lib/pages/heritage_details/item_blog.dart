@@ -104,9 +104,9 @@ class ItemBlogHeritageDetail extends GetView<HeritageDetailsController> {
                     Text(
                       userLike.toString(),
                       style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.placeHolderColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.placeHolderColor,
                       ),
                     ),
                   ],

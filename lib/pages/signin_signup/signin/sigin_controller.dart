@@ -38,7 +38,7 @@ class SignInController extends GetxController{
         String fullName = '';
         String id='';
         String image='';
-         final data = db.collection("users")
+        final data = db.collection("users")
             .where('email',isEqualTo: text1Controller.text.toString())
             .get()
             .then((QuerySnapshot<Map<String, dynamic>> snapshot) {

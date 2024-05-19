@@ -9,11 +9,9 @@ import 'package:get/state_manager.dart';
 import 'package:vnheritage/common/colors/app_colors.dart';
 import 'package:vnheritage/pages/application/home/home_controller.dart';
 import 'package:vnheritage/pages/application/home/item_blog.dart';
-import 'package:vnheritage/share/blog_item.dart';
 import 'package:vnheritage/share/food_item.dart';
 import 'package:vnheritage/share/heritage_item.dart';
 
-import '../../../share/hotel_item.dart';
 import '../application_controller.dart';
 
 class HomePage extends GetView<HomeController>{

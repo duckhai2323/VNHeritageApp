@@ -127,7 +127,7 @@ class CommentPage extends GetView<CommentController>{
         ),
       ),
       body: Obx(
-          ()=> controller.listComment.isNotEmpty?ConstrainedBox(
+            ()=> controller.listComment.isNotEmpty?ConstrainedBox(
           constraints: BoxConstraints.expand(),
           child: Stack(
             children: [

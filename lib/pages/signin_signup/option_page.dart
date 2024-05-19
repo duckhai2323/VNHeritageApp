@@ -15,10 +15,10 @@ class OptionPage extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/vnheriatge.appspot.com/o/snapedit_1715932175909.jpeg?alt=media&token=d940e105-0939-444a-b274-aa73a9099698'),
-            fit: BoxFit.cover,
-          )
+            image: DecorationImage(
+              image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/vnheriatge.appspot.com/o/snapedit_1715932175909.jpeg?alt=media&token=d940e105-0939-444a-b274-aa73a9099698'),
+              fit: BoxFit.cover,
+            )
         ),
         child: Stack(
           children: [
@@ -39,9 +39,9 @@ class OptionPage extends StatelessWidget {
                     const Text(
                       'VNHeritage',
                       style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white
                       ),
                     ),
 
@@ -58,32 +58,32 @@ class OptionPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                       InkWell(
-                         onTap:(){
-                           Get.toNamed(AppRoutes.SIGNIN);
-                         },
-                         child: Container(
-                           width:105,
-                           padding: EdgeInsets.symmetric(vertical: 4,horizontal: 10),
-                           decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(20),
-                             border: Border.all(
-                                 width: 1.5,
-                                 color: Colors.white
-                             ),
-                           ),
-                           child: const Center(
-                             child: Text(
-                               'Đăng nhập',
-                               style: TextStyle(
-                                 fontSize: 16,
-                                 color: Colors.white,
-                                 fontWeight: FontWeight.w500
-                               ),
-                             ),
-                           ),
-                         ),
-                       ),
+                        InkWell(
+                          onTap:(){
+                            Get.toNamed(AppRoutes.SIGNIN);
+                          },
+                          child: Container(
+                            width:105,
+                            padding: EdgeInsets.symmetric(vertical: 4,horizontal: 10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                  width: 1.5,
+                                  color: Colors.white
+                              ),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'Đăng nhập',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
 
                         SizedBox(width: 20,),
 
@@ -170,7 +170,7 @@ class OptionPage extends StatelessWidget {
                           margin: EdgeInsets.symmetric(horizontal: 5),
                           padding: EdgeInsets.all(0),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(30),
                               border: Border.all(
                                   width: 1, color: AppColors.placeHolderColor)),
@@ -191,4 +191,3 @@ class OptionPage extends StatelessWidget {
     );
   }
 }
-

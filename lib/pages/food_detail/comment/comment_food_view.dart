@@ -82,12 +82,12 @@ class CommentFoodPage extends GetView<CommentFoodController> {
               child: Text(
                 controller.food_name.value,
                 style: const TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600
                 ),
               ),
             ),
-        
+
             Container(
               margin: const EdgeInsets.only(top: 15),
               width: MediaQuery.of(context).size.width,
@@ -127,7 +127,7 @@ class CommentFoodPage extends GetView<CommentFoodController> {
                             color: AppColors.bottomNaviColor
                         ),
                       ),
-        
+
                       child: const Center(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -148,7 +148,7 @@ class CommentFoodPage extends GetView<CommentFoodController> {
                       ),
                     ),
                   ),),
-        
+
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: Column(
@@ -164,9 +164,9 @@ class CommentFoodPage extends GetView<CommentFoodController> {
                             color: AppColors.bottomNaviColor,
                           ),
                         ),
-        
+
                         SizedBox(height: 5,),
-        
+
                         TextFormField(
                           controller: controller.textController,
                           maxLines: 6,
@@ -197,7 +197,7 @@ class CommentFoodPage extends GetView<CommentFoodController> {
                                     width: 1
                                 )
                             ),
-        
+
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(4),
                                 borderSide:  const BorderSide(
@@ -210,7 +210,7 @@ class CommentFoodPage extends GetView<CommentFoodController> {
                       ],
                     ),
                   ),
-        
+
                   Row(
                     children: [
                       Obx(() =>  Checkbox(
@@ -243,7 +243,7 @@ class CommentFoodPage extends GetView<CommentFoodController> {
                       ),
                     ],
                   ),
-        
+
                 ],
               ),
             ),
