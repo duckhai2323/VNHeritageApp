@@ -24,8 +24,6 @@ class CommentFoodController extends GetxController {
   var clickSelect = false.obs;
   List<String> listUri = <String>[].obs;
 
-  final foodDetailController = Get.find<FoodDetailController>();
-
   @override
   void onInit() {
     super.onInit();
@@ -75,7 +73,6 @@ class CommentFoodController extends GetxController {
           .doc(documentId)
           .set(data);
     }
-    foodDetailController.GetComment();
     Navigator.pop(context);
     Get.back();
   }
@@ -87,7 +84,7 @@ class CommentFoodController extends GetxController {
           const CircularProgressIndicator(),
           Container(
               margin: const EdgeInsets.only(left: 15),
-              child: Text(
+              child: const Text(
                 "Loading...",
                 style: TextStyle(
                     fontWeight: FontWeight.w500,

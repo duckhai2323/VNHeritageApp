@@ -13,6 +13,7 @@ class FoodDetailController extends GetxController {
   var listener;
   final id = ''.obs;
   List<Food> listFoods = <Food>[].obs;
+  List<Food> listFoodRec = <Food>[].obs;
 
   var currPage = 1.obs;
   void HandlePage(int index) {
@@ -25,6 +26,7 @@ class FoodDetailController extends GetxController {
     id.value = Get.parameters['id'] ?? "";
     GetData();
     GetComment();
+    GetListFood();
   }
 
   Future<void> GetData() async {
@@ -51,7 +53,6 @@ class FoodDetailController extends GetxController {
             fromFirestore: CommentFood.fromFirestore,
             toFirestore: (CommentFood comment, options) =>
                 comment.toFirestore())
-        .orderBy("timestamp", descending: false)
         .where("id_blog", isEqualTo: id.value);
     listComment.clear();
     listener = data.snapshots().listen((event) {
@@ -72,6 +73,48 @@ class FoodDetailController extends GetxController {
         }
       }
     });
+  }
+
+  Future<void> GetListFood() async {
+    var data = await db
+        .collection("foods")
+        .withConverter(
+            fromFirestore: Food.fromFirestore,
+            toFirestore: (Food food, options) => food.toFirestore())
+        .orderBy("timestamp", descending: false);
+    listFoodRec.clear();
+    listener = data.snapshots().listen((event) {
+      for (var change in event.docChanges) {
+        switch (change.type) {
+          case DocumentChangeType.added:
+            if (change.doc.data() != null &&
+                change.doc.data()!.id != id.value) {
+              listFoodRec.insert(0, change.doc.data()!);
+            }
+            break;
+          case DocumentChangeType.modified:
+            if (change.doc.data() != null) {
+              Food food = change.doc.data()!;
+              for (int i = 0; i < listFoodRec.length; i++) {
+                if (listFoodRec[i].id == food.id) {
+                  listFoodRec.insert(i, food);
+                  listFoodRec.removeAt(i + 1);
+                }
+              }
+            }
+            break;
+          case DocumentChangeType.removed:
+            break;
+        }
+      }
+    });
+  }
+
+  void ClickItem(String id_str) {
+    id.value = id_str;
+    GetData();
+    GetComment();
+    GetListFood();
   }
 
   void HandleComment() {
