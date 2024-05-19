@@ -254,8 +254,8 @@ class SignUpPage extends GetView<SignUpController>{
 
                       InkWell(
                         onTap: () {
-                         controller.CreateUserWithEmailAndPassword();
-                         controller.PushDataUser(context);
+                          controller.CreateUserWithEmailAndPassword();
+                          controller.PushDataUser(context);
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width-200,

@@ -93,7 +93,7 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
                     top: 25,
                     right: 25,
                     child: Obx(
-                        ()=> InkWell(
+                          ()=> InkWell(
                         onTap: (){
                           controller.ClickItemHeart();
                         },
@@ -378,7 +378,7 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
                   ),
 
                   Obx(
-                      ()=> Container(
+                        ()=> Container(
                       width: MediaQuery.of(context).size.width-30,
                       child: Row(
                         mainAxisSize: MainAxisSize.max,

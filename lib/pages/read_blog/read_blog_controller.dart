@@ -88,20 +88,6 @@ class ReadBlogController extends GetxController {
             break;
           case DocumentChangeType.modified:
             if(change.doc.data()!=null) {
-              // Blog blog = change.doc.data()!;
-              // for(int i = 0; i < listBlog1.length; i++){
-              //   if(listBlog1[i].id == blog.id){
-              //     listBlog1.insert(i, blog);
-              //     listBlog1.removeAt(i+1);
-              //   }
-              // }
-              //
-              // for(int i = 0; i < listBlog2.length; i++){
-              //   if(listBlog2[i].id == blog.id){
-              //     listBlog2.insert(i, blog);
-              //     listBlog2.removeAt(i+1);
-              //   }
-              // }
             }
             break;
           case DocumentChangeType.removed:
