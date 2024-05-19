@@ -124,11 +124,11 @@ class HomePage extends GetView<HomeController>{
           SliverToBoxAdapter(
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 15,vertical: 15),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Text(
+                    const Text(
                       'Danh mục',
                       style: TextStyle(
                         fontSize: 18,
@@ -136,14 +136,7 @@ class HomePage extends GetView<HomeController>{
                       ),
                     ),
 
-                    Text(
-                      'Xem tất cả',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.bottomNaviColor
-                      ),
-                    ),
+                    Container(),
                   ],
                 ),
               )
@@ -211,102 +204,117 @@ class HomePage extends GetView<HomeController>{
             ),
           ),
 
-          const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.only(left: 15),
-              child: Text(
-                'Danh lăm thắng cảnh',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+          SliverToBoxAdapter(
+              child: Container(
+                margin: EdgeInsets.only(left: 15, top: 5,right: 15,bottom: 10),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      'Danh lam thắng cảnh',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    Text(
+                      'Xem tất cả',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.bottomNaviColor
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
+              )
           ),
 
-          Obx(
-                ()=> SliverToBoxAdapter(
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap:(){
-                              if(controller.clickEvent.isTrue) {
-                                controller.clickEvent.value = false;
-                              }
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                              decoration: BoxDecoration(
-                                color: controller.clickEvent.isTrue?Colors.white:Color.fromRGBO(102, 102, 102, 1),
-                                borderRadius: BorderRadius.circular(3),
-                                border: Border.all(
-                                  width: 1,
-                                  color: Color.fromRGBO(102, 102, 102, 1),
-                                ),
-                              ),
-                              child: Text(
-                                'Điểm tham quan',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: controller.clickEvent.isTrue?Color.fromRGBO(102, 102, 102, 1):Colors.white
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          SizedBox(width: 10,),
-
-                          InkWell(
-                            onTap: (){
-                              if(controller.clickEvent.isFalse) {
-                                controller.clickEvent.value = true;
-                              }
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                              decoration: BoxDecoration(
-                                color: controller.clickEvent.isTrue?Color.fromRGBO(102, 102, 102, 1):Colors.white,
-                                borderRadius: BorderRadius.circular(3),
-                                border: Border.all(
-                                  width: 1,
-                                  color: Color.fromRGBO(102, 102, 102, 1),
-                                ),
-                              ),
-                              child: Text(
-                                'Sự kiện tổ chức',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color:controller.clickEvent.isTrue?Colors.white:Color.fromRGBO(102, 102, 102, 1),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Text(
-                        'Xem tất cả',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.bottomNaviColor
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-            ),
-          ),
+          // Obx(
+          //       ()=> SliverToBoxAdapter(
+          //       child: Container(
+          //         margin: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+          //         child: Row(
+          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //           mainAxisSize: MainAxisSize.max,
+          //           children: [
+          //             Row(
+          //               mainAxisAlignment: MainAxisAlignment.start,
+          //               mainAxisSize: MainAxisSize.min,
+          //               crossAxisAlignment: CrossAxisAlignment.center,
+          //               children: [
+          //                 InkWell(
+          //                   onTap:(){
+          //                     if(controller.clickEvent.isTrue) {
+          //                       controller.clickEvent.value = false;
+          //                     }
+          //                   },
+          //                   child: Container(
+          //                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+          //                     decoration: BoxDecoration(
+          //                       color: controller.clickEvent.isTrue?Colors.white:Color.fromRGBO(102, 102, 102, 1),
+          //                       borderRadius: BorderRadius.circular(3),
+          //                       border: Border.all(
+          //                         width: 1,
+          //                         color: Color.fromRGBO(102, 102, 102, 1),
+          //                       ),
+          //                     ),
+          //                     child: Text(
+          //                       'Điểm tham quan',
+          //                       style: TextStyle(
+          //                           fontSize: 15,
+          //                           fontWeight: FontWeight.bold,
+          //                           color: controller.clickEvent.isTrue?Color.fromRGBO(102, 102, 102, 1):Colors.white
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ),
+          //
+          //                 SizedBox(width: 10,),
+          //
+          //                 InkWell(
+          //                   onTap: (){
+          //                     if(controller.clickEvent.isFalse) {
+          //                       controller.clickEvent.value = true;
+          //                     }
+          //                   },
+          //                   child: Container(
+          //                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+          //                     decoration: BoxDecoration(
+          //                       color: controller.clickEvent.isTrue?Color.fromRGBO(102, 102, 102, 1):Colors.white,
+          //                       borderRadius: BorderRadius.circular(3),
+          //                       border: Border.all(
+          //                         width: 1,
+          //                         color: Color.fromRGBO(102, 102, 102, 1),
+          //                       ),
+          //                     ),
+          //                     child: Text(
+          //                       'Sự kiện tổ chức',
+          //                       style: TextStyle(
+          //                         fontSize: 15,
+          //                         fontWeight: FontWeight.bold,
+          //                         color:controller.clickEvent.isTrue?Colors.white:Color.fromRGBO(102, 102, 102, 1),
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //             const Text(
+          //               'Xem tất cả',
+          //               style: TextStyle(
+          //                   fontSize: 16,
+          //                   fontWeight: FontWeight.w500,
+          //                   color: AppColors.bottomNaviColor
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       )
+          //   ),
+          // ),
 
           SliverToBoxAdapter(
             child: SingleChildScrollView(
