@@ -4,7 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:get/state_manager.dart';
+import 'package:vnheritage/pages/application/application_controller.dart';
+import 'package:vnheritage/pages/read_blog/item_blog.dart';
 import 'package:vnheritage/pages/read_blog/read_blog_controller.dart';
 
 import '../../common/colors/app_colors.dart';
@@ -45,7 +50,7 @@ class ReadBLogPage extends GetView<ReadBlogController> {
               ],
             ),
             const Text(
-              'Khoanh khac du lich',
+              'Khoảnh khắc du lịch',
               style: TextStyle(
                 fontSize: 18,
                 color:  AppColors.bottomNaviColor,
@@ -55,7 +60,7 @@ class ReadBLogPage extends GetView<ReadBlogController> {
 
             InkWell(
               onTap: (){
-
+                controller.HandleCreatePage();
               },
               child: Container(
                 width: 32,
@@ -70,7 +75,7 @@ class ReadBLogPage extends GetView<ReadBlogController> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
+      body:Obx(()=>controller.blogs.isNotEmpty? SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -84,43 +89,45 @@ class ReadBLogPage extends GetView<ReadBlogController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    children: [
-                      const CircleAvatar(
-                        radius: 25,
-                        backgroundImage:NetworkImage('https://media.themoviedb.org/t/p/w300_and_h450_bestv2/zhurTN2Aqts3joJM8dCPbEt0pZx.jpg'),
-                      ),
-                      const SizedBox(width: 10,),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const SizedBox(height: 5,),
-                          const Text(
-                            'Khai ne',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                  Obx(
+                    ()=>controller.users.isNotEmpty? Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 25,
+                          backgroundImage:NetworkImage(controller.users[0].image??""),
+                        ),
+                        const SizedBox(width: 10,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const SizedBox(height: 5,),
+                            Text(
+                              controller.users[0].fullName??"",
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 3,),
-                          Container(
-                              height: 25,
-                              padding: const EdgeInsets.symmetric(horizontal: 8),
-                              color: const Color.fromRGBO(248, 224, 222,1),
-                              child: const Center(
-                                child: Text(
-                                  'Travel Expert',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Color.fromRGBO(209, 92, 72,1)
+                            const SizedBox(height: 3,),
+                            Container(
+                                height: 25,
+                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                color: const Color.fromRGBO(248, 224, 222,1),
+                                child: const Center(
+                                  child: Text(
+                                    'Travel Expert',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Color.fromRGBO(209, 92, 72,1)
+                                    ),
                                   ),
-                                ),
-                              )
-                          ),
-                          const SizedBox(height: 5,),
-                        ],
-                      ),
-                    ],
+                                )
+                            ),
+                            const SizedBox(height: 5,),
+                          ],
+                        ),
+                      ],
+                    ):Container(),
                   ),
 
                   Container(
@@ -147,53 +154,29 @@ class ReadBLogPage extends GetView<ReadBlogController> {
               ),
             ),
 
-            Container(
-              margin: EdgeInsets.only(bottom: 10),
-              height: MediaQuery.of(context).size.height*1/3,
-              width: MediaQuery.of(context).size.width,
-              child: PageView(
-                controller: controller.pageController,
-                onPageChanged: (index){
-                  controller.ChangePageView(index);
-                },
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height*1/3,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage('https://nhiepanhhanoi.org.vn/wp-content/uploads/2020/11/6-640x455.jpg'),
-                            fit: BoxFit.fill
-                        )
-                    ),
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height*1/3,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage('https://nhiepanhhanoi.org.vn/wp-content/uploads/2020/11/6-640x455.jpg'),
-                            fit: BoxFit.fill
-                        )
-                    ),
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height*1/3,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage('https://nhiepanhhanoi.org.vn/wp-content/uploads/2020/11/6-640x455.jpg'),
-                            fit: BoxFit.fill
-                        )
-                    ),
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height*1/3,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage('https://nhiepanhhanoi.org.vn/wp-content/uploads/2020/11/6-640x455.jpg'),
-                            fit: BoxFit.fill
-                        )
-                    ),
-                  ),
-                ],
+            Obx(
+                  ()=>Container(
+                margin: EdgeInsets.only(bottom: 10),
+                height: MediaQuery.of(context).size.height*1/3,
+                width: MediaQuery.of(context).size.width,
+                child: PageView.builder(
+                  controller: controller.pageController,
+                  onPageChanged: (index){
+                    controller.ChangePageView(index);
+                  },
+                  itemCount: controller.blogs[0].images.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      height: MediaQuery.of(context).size.height*1/3,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(controller.blogs[0].images[index]),
+                              fit: BoxFit.fill
+                          )
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
 
@@ -201,7 +184,7 @@ class ReadBLogPage extends GetView<ReadBlogController> {
               width: MediaQuery.of(context).size.width,
               child: Center(
                 child: Obx(()=> DotsIndicator(
-                  dotsCount: 4,
+                  dotsCount: controller.blogs[0].images.length,
                   position:controller.statePageView.value,
                   decorator: DotsDecorator(
                     activeColor: AppColors.bottomNaviColor,
@@ -213,167 +196,179 @@ class ReadBLogPage extends GetView<ReadBlogController> {
               ),
             ),
 
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Text(
-                'Ho Hoan Kiem',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600
-                ),
-              ),
-            ),
-
-            const Padding(
-              padding: EdgeInsets.only(left: 15,right: 15,top: 10),
-              child: Text('Sáng nay (5/5), chào mừng Kỷ niệm 70 năm Chiến thắng lịch sử Điện Biên Phủ, hơn 30 nghìn hội viên, phụ nữ Thủ đô đồng loạt thực hiện màn đồng diễn dân vũ tại 579 xã, phường, thị trấn. Đây là những màn đồng diễn được thực hiện trên nền nhạc 3 ca khúc “Qua miền Tây Bắc”, “Chiến thắng Điện Biên” và “Inh lả ơi”.',
-                maxLines: 12,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 15,
-                ),
-              ),
-            ),
-
-            Container(
-              margin: const EdgeInsets.only(top: 20,left: 15,right: 15),
-              width: MediaQuery.of(context).size.width,
-              height: 130,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(5),
-                  bottomRight: Radius.circular(5)
-                ),
-                color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 0.25,
-                      blurRadius: 10,
-                      offset: Offset(0,2),
-                    )
-                  ]
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 130,
-                    width: 120,
-                    margin: const EdgeInsets.only(right: 10),
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                        ),
-                        image: DecorationImage(
-                          image: NetworkImage('https://elitetour.com.vn/files/images/VinpearlResort%26SpaHaLong/bang-gia-phong-vinpearl-ha-long-6.jpg'),
-                          fit: BoxFit.cover,
-                        )
-                    ),
+            Obx(
+                ()=>Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Text(
+                  controller.blogs[0].title??"",
+                  style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600
                   ),
+                ),
+              ),
+            ),
 
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+            Obx(
+                ()=> Padding(
+                padding: EdgeInsets.only(left: 15,right: 15,top: 10),
+                child: Text(
+                  controller.blogs[0].content??"",
+                  maxLines: 12,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+            ),
+
+            Obx(
+                () =>controller.heritages.isNotEmpty?InkWell(
+                  onTap: (){
+                    controller.HandleHeritageDetailsPage(controller.heritages[0].id??"");
+                  },
+                  child: Container(
+                  margin: const EdgeInsets.only(top: 20,left: 15,right: 15),
+                  width: MediaQuery.of(context).size.width,
+                  height: 130,
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(5),
+                          bottomRight: Radius.circular(5)
+                      ),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 0.25,
+                          blurRadius: 10,
+                          offset: Offset(0,2),
+                        )
+                      ]
+                  ),
+                  child: Row(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 5,),
-                      const Text('Ho Hoan Kiem',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
+                      Container(
+                        height: 130,
+                        width: 120,
+                        margin: const EdgeInsets.only(right: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                            ),
+                            image: DecorationImage(
+                              image: NetworkImage(controller.heritages[0].images[0]),
+                              fit: BoxFit.cover,
+                            )
                         ),
                       ),
 
-                      SizedBox(height: 5,),
-
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
-                            margin: const EdgeInsets.only(right: 10,top: 3,bottom: 3),
-                            decoration: const BoxDecoration(
-                                color: AppColors.bottomNaviColor,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),
-                                )
-                            ),
-                            child:RichText(
-                              text: const TextSpan(
-                                children: <TextSpan>[
-                                  TextSpan(text: '4,5', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 14)),
-                                  TextSpan(text: '/5', style: TextStyle(color: AppColors.placeHolderColor,fontWeight: FontWeight.w500, fontSize: 13)),
-                                ],
-                              ),
-                            ),
-                          ),
-
-                          const Text(
-                            '200 Đánh giá',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: AppColors.placeHolderColor
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 5,),
-
-                      const Row(
-                        children: [
-                          Icon(Icons.location_on,size: 20,color: Colors.grey,),
-                          Text(
-                            'Ha Noi',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: AppColors.placeHolderColor
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      SizedBox(height: 5,),
-
-                      Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(width: 180,),
-                          Container(
-                            width: 60,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: AppColors.bottomNaviColor,
-                              borderRadius: BorderRadius.circular(5)
+                          const SizedBox(height: 5,),
+                          Text(controller.heritages[0].title??"",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
                             ),
-                            child: const Center(
-                              child: Text(
-                                'Xem',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white
+                          ),
+
+                          SizedBox(height: 5,),
+
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                                margin: const EdgeInsets.only(right: 10,top: 3,bottom: 3),
+                                decoration: const BoxDecoration(
+                                    color: AppColors.bottomNaviColor,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10),
+                                    )
+                                ),
+                                child:RichText(
+                                  text: const TextSpan(
+                                    children: <TextSpan>[
+                                      TextSpan(text: '4,5', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 14)),
+                                      TextSpan(text: '/5', style: TextStyle(color: AppColors.placeHolderColor,fontWeight: FontWeight.w500, fontSize: 13)),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
+
+                              Text(
+                                controller.heritages[0].evaluation??"",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    color: AppColors.placeHolderColor
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 5,),
+
+                          Row(
+                            children: [
+                              const Icon(Icons.location_on,size: 20,color: Colors.grey,),
+                              Text(
+                                controller.heritages[0].province??"",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    color: AppColors.placeHolderColor
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(height: 5,),
+
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const SizedBox(width: 180,),
+                              Container(
+                                width: 60,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                    color: AppColors.bottomNaviColor,
+                                    borderRadius: BorderRadius.circular(5)
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    'Xem',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ],
                   ),
-                ],
-              ),
+                                ),
+                ):Container(),
             ),
 
 
@@ -391,7 +386,7 @@ class ReadBLogPage extends GetView<ReadBlogController> {
                     children: [
                       const Expanded(
                         child: Text(
-                          'Comments',
+                          'Bình luận',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 16,
@@ -402,13 +397,13 @@ class ReadBLogPage extends GetView<ReadBlogController> {
 
                       InkWell(
                         onTap: (){
-                          //controller.HandleComment();
+                          controller.HandleComment();
                         },
                         child: const Text(
-                          'See All',
+                          'Xem tất cả',
                           style: TextStyle(
-                            //color: AppColors.backgroundIntro,
-                            fontSize: 16,
+                            color: AppColors.bottomNaviColor,
+                            fontSize: 15,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -425,14 +420,14 @@ class ReadBLogPage extends GetView<ReadBlogController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 23,
-                        backgroundImage: NetworkImage('https://nhiepanhhanoi.org.vn/wp-content/uploads/2020/11/6-640x455.jpg'),
+                        backgroundImage: NetworkImage(ApplicationController.user_image),
                       ),
                       Expanded(
                         child: InkWell(
                           onTap: (){
-                           // controller.HandleComment();
+                            controller.HandleComment();
                           },
                           child: Container(
                             height: 40,
@@ -444,7 +439,7 @@ class ReadBLogPage extends GetView<ReadBlogController> {
                               color: const Color.fromRGBO(244, 244, 244, 1),
                             ),
                             child: const Text(
-                              'Comment...',
+                              'Bình luận...',
                               style: TextStyle(
                                 color: AppColors.placeHolderColor,
                                 fontSize: 14,
@@ -460,8 +455,8 @@ class ReadBLogPage extends GetView<ReadBlogController> {
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(left:15,bottom: 5),
+            const Padding(
+              padding: EdgeInsets.only(left:15,bottom: 5),
               child: Text(
                 'Khoảnh khắc liên quan',
                 style: TextStyle(
@@ -472,45 +467,69 @@ class ReadBLogPage extends GetView<ReadBlogController> {
               ),
             ),
 
-            Container(
-              width: MediaQuery.of(context).size.width,
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width/2,
-                    padding: EdgeInsets.only(left: 15,right: 5),
-                    child: ListView.builder(
-                      itemCount: 5,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return BlogItem(context);
-                      },
+            Obx(()=> Container(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width/2-15,
+                      padding: const EdgeInsets.only(right: 5),
+                      child: ListView.builder(
+                        padding: const EdgeInsets.only(top: 15),
+                        itemCount: controller.listBlog1.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return InkWell(
+                            onTap: (){
+                              //controller.HandleReadBLog(controller.listBlog1[index].id);
+                            },
+                            child: ItemBlogReadPage(
+                                controller.listBlog1[index].image,
+                                controller.listBlog1[index].title,
+                                controller.listBlog1[index].user_image,
+                                controller.listBlog1[index].user_name,
+                                controller.listBlog1[index].userLike),
+                          );
+                        },
+                      ),
                     ),
-                  ),
 
-                  Container(
-                    width: MediaQuery.of(context).size.width/2,
-                    padding: EdgeInsets.only(right: 15,left: 5),
-                    child: ListView.builder(
-                      itemCount: 5,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return BlogItem(context);
-                      },
+                    Container(
+                      width: MediaQuery.of(context).size.width/2-15,
+                      padding: const EdgeInsets.only(left: 5),
+                      child: ListView.builder(
+                        padding: const EdgeInsets.only(top: 15),
+                        itemCount: controller.listBlog2.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return InkWell(
+                            onTap: (){
+                              //controller.HandleReadBLog(controller.listBlog1[index].id);
+                            },
+                            child: ItemBlogReadPage(
+                                controller.listBlog2[index].image,
+                                controller.listBlog2[index].title,
+                                controller.listBlog2[index].user_image,
+                                controller.listBlog2[index].user_name,
+                                controller.listBlog2[index].userLike),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
 
             SizedBox(height: 100,),
           ],
         ),
-      ),
+      ):Container(color: Colors.white,)),
     );
   }
 }

@@ -8,18 +8,17 @@ class Comment {
   final String? userimage;
   final DateTime? timestamp;
 
-  Comment(this.id_blog, this.id_user, this.title, this.username, this.userimage,
-      this.timestamp);
+  Comment(this.id_blog, this.id_user, this.title, this.username, this.userimage,this.timestamp);
 
   factory Comment.fromFirestore(DocumentSnapshot<Map<String, dynamic>> snapshot,
-      SnapshotOptions? options) {
+      SnapshotOptions? options){
     final data = snapshot.data();
     return Comment(
       data?['id_blog'] ?? "",
       data?['id_user'] ?? "",
       data?['title'] ?? "",
-      data?['username'] ?? "",
-      data?['userimage'] ?? "",
+      data?['username']??"",
+      data?['userimage']??"",
       (data?['timestamp'] as Timestamp).toDate(),
     );
   }
@@ -31,7 +30,7 @@ class Comment {
       'title': title,
       'username': username,
       'userimage': userimage,
-      'timestamp': timestamp,
+      'timestamp':timestamp,
     };
   }
 }

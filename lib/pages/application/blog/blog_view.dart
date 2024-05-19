@@ -27,22 +27,12 @@ class BlogPage extends GetView<BlogController> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back_ios),
-                  iconSize: 23,
-                  color: AppColors.bottomNaviColor,
-                  onPressed: (){
-
-                  },
-                ),
-              ],
-            ),
+           const SizedBox(
+             height: 30,
+             width: 30,
+           ),
             const Text(
-              'Khoanh khac du lich',
+              'Khoảnh khắc du lịch',
               style: TextStyle(
                 fontSize: 18,
                 color:  AppColors.bottomNaviColor,
@@ -52,7 +42,7 @@ class BlogPage extends GetView<BlogController> {
 
             InkWell(
               onTap: (){
-
+                controller.HandleCreatePage();
               },
               child: Container(
                 width: 32,
@@ -68,7 +58,7 @@ class BlogPage extends GetView<BlogController> {
         ),
       ),
       body: SingleChildScrollView(
-        child: BlogList(),
+        child: Obx(()=>controller.listNews.isNotEmpty?BlogList():Container(color: Colors.white,),),
       ),
     );
   }

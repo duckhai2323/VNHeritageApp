@@ -27,26 +27,26 @@ class CommentFoodController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    food_id.value = Get.parameters['id'] ?? "";
-    food_name.value = Get.parameters['name'] ?? "";
+    food_id.value = Get.parameters['id']??"";
+    food_name.value = Get.parameters['name']??"";
   }
 
   Future<void> selectImages() async {
-    try {
+    try{
       List<XFile>? selectImages = await ImagePicker().pickMultiImage();
-      if (selectImages.isNotEmpty) {
+      if(selectImages.isNotEmpty) {
         listImages.addAll(selectImages);
         clickSelect.value = true;
       }
-    } catch (e) {
+    } catch(e){
       print(e);
     }
   }
 
   Future<void> senComment(BuildContext context) async {
     showLoaderDialog(context);
-    if (listImages.isNotEmpty) {
-      for (var element in listImages) {
+    if(listImages.isNotEmpty) {
+      for(var element in listImages) {
         final path = 'comment_food/${element.name}';
         final ref = FirebaseStorage.instance.ref().child(path);
         uploadTask = ref.putFile(File(element.path));
@@ -55,49 +55,27 @@ class CommentFoodController extends GetxController {
         listUri.add(url);
       }
       String documentId = firebase.collection("food_comments").doc().id;
-      var data = CommentFood(
-          food_id.value,
-          ApplicationController.user_id,
-          textController.text.toString(),
-          ApplicationController.user_name,
-          ApplicationController.user_image,
-          DateTime.now(),
-          images: listUri);
-      await firebase
-          .collection('food_comments')
-          .withConverter(
-            fromFirestore: CommentFood.fromFirestore,
-            toFirestore: (CommentFood commentFood, options) =>
-                commentFood.toFirestore(),
-          )
-          .doc(documentId)
-          .set(data);
+      var data = CommentFood(food_id.value, ApplicationController.user_id, textController.text.toString(), ApplicationController.user_name, ApplicationController.user_image, DateTime.now(),images: listUri);
+      await firebase.collection('food_comments').withConverter(
+        fromFirestore: CommentFood.fromFirestore,
+        toFirestore: (CommentFood commentFood, options)=>commentFood.toFirestore(),
+      ).doc(documentId).set(data);
     }
     Navigator.pop(context);
     Get.back();
   }
 
-  void showLoaderDialog(BuildContext context) {
-    AlertDialog alert = AlertDialog(
+  void showLoaderDialog(BuildContext context){
+    AlertDialog alert=AlertDialog(
       content: Row(
         children: [
           const CircularProgressIndicator(),
-          Container(
-              margin: const EdgeInsets.only(left: 15),
-              child: const Text(
-                "Loading...",
-                style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: AppColors.bottomNaviColor),
-              )),
-        ],
-      ),
+          Container(margin: const EdgeInsets.only(left: 15),child:Text("Loading...", style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16, color: AppColors.bottomNaviColor), )),
+        ],),
     );
-    showDialog(
-      barrierDismissible: true,
-      context: context,
-      builder: (BuildContext context) {
+    showDialog(barrierDismissible: true,
+      context:context,
+      builder:(BuildContext context){
         return alert;
       },
     );

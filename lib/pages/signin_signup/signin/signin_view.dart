@@ -8,6 +8,7 @@ import 'package:vnheritage/pages/signin_signup/signin/sigin_controller.dart';
 import '../../../common/colors/app_colors.dart';
 
 class SignInPage extends GetView<SignInController> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,17 +18,17 @@ class SignInPage extends GetView<SignInController> {
           height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
               image: DecorationImage(
-            image: NetworkImage(
-                'https://firebasestorage.googleapis.com/v0/b/vnheriatge.appspot.com/o/snapedit_1715932175909.jpeg?alt=media&token=d940e105-0939-444a-b274-aa73a9099698'),
-            fit: BoxFit.cover,
-          )),
+                image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/vnheriatge.appspot.com/o/snapedit_1715932175909.jpeg?alt=media&token=d940e105-0939-444a-b274-aa73a9099698'),
+                fit: BoxFit.cover,
+              )
+          ),
           child: Stack(
             children: [
               Positioned(
                 bottom: 160,
                 left: 20,
                 child: Container(
-                  width: MediaQuery.of(context).size.width - 40,
+                  width: MediaQuery.of(context).size.width-40,
                   padding: EdgeInsets.symmetric(vertical: 15),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.4),
@@ -42,8 +43,10 @@ class SignInPage extends GetView<SignInController> {
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                            color: Colors.white
+                        ),
                       ),
+        
                       const Text(
                         'Chào mừng bạn đến với VNHeritage',
                         style: TextStyle(
@@ -52,6 +55,7 @@ class SignInPage extends GetView<SignInController> {
                           color: Colors.white,
                         ),
                       ),
+        
                       const Padding(
                         padding: EdgeInsets.only(top: 25, bottom: 15),
                         child: Text(
@@ -62,10 +66,11 @@ class SignInPage extends GetView<SignInController> {
                               color: Colors.white),
                         ),
                       ),
+        
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 30),
                         child: TextFormField(
-                          controller: controller.text1Controller,
+                         controller: controller.text1Controller,
                           obscureText: false,
                           keyboardType: TextInputType.emailAddress,
                           style: const TextStyle(
@@ -73,8 +78,7 @@ class SignInPage extends GetView<SignInController> {
                               fontSize: 16,
                               color: Colors.white),
                           decoration: InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 8),
+                            contentPadding: const EdgeInsets.symmetric(vertical: 8),
                             filled: true,
                             fillColor: Colors.grey.withOpacity(0.4),
                             hintText: 'Email',
@@ -100,8 +104,9 @@ class SignInPage extends GetView<SignInController> {
                           ),
                         ),
                       ),
+        
                       Obx(
-                        () => Padding(
+                            () => Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 10),
                           child: TextFormField(
@@ -113,8 +118,7 @@ class SignInPage extends GetView<SignInController> {
                                 fontSize: 16,
                                 color: Colors.white),
                             decoration: InputDecoration(
-                              contentPadding:
-                                  const EdgeInsets.symmetric(vertical: 8),
+                              contentPadding: const EdgeInsets.symmetric(vertical: 8),
                               filled: true,
                               fillColor: Colors.grey.withOpacity(0.4),
                               hintText: 'Password',
@@ -123,11 +127,8 @@ class SignInPage extends GetView<SignInController> {
                                   fontSize: 16,
                                   fontFamily: "Roboto Regular",
                                   fontWeight: FontWeight.w600),
-                              prefixIcon: const Icon(
-                                Icons.lock_outline,
-                                size: 20,
-                                color: Colors.white,
-                              ),
+                              prefixIcon: const Icon(Icons.lock_outline,
+                                  size: 20, color: Colors.white,),
                               suffixIcon: InkWell(
                                 onTap: () {
                                   controller.ClickVisible();
@@ -143,8 +144,7 @@ class SignInPage extends GetView<SignInController> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide: const BorderSide(
-                                      color: AppColors.bgTextFeild,
-                                      width: 1.5)),
+                                      color: AppColors.bgTextFeild, width: 1.5)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide: const BorderSide(
@@ -152,24 +152,22 @@ class SignInPage extends GetView<SignInController> {
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide: const BorderSide(
-                                      color: AppColors.bgTextFeild,
-                                      width: 1.5)),
+                                      color: AppColors.bgTextFeild, width: 1.5)),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+
+                      SizedBox(height: 10,),
+        
                       InkWell(
                         onTap: () {
                           controller.HandleApplication(context);
                         },
                         child: Container(
-                          width: MediaQuery.of(context).size.width - 200,
+                          width: MediaQuery.of(context).size.width-200,
                           height: 45,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 10),
+                          margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                           decoration: BoxDecoration(
                               color: AppColors.bottomNaviColor,
                               borderRadius: BorderRadius.circular(30),

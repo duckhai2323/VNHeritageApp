@@ -4,23 +4,29 @@ import 'package:vnheritage/common/document_object/comment.dart';
 class CommentFood extends Comment {
   final List<String>? images;
 
-  CommentFood(String id_blog, String id_user, String title, String username,
-      String userimage, DateTime timestamp,
-      {this.images})
-      : super(id_blog, id_user, title, username, userimage, timestamp);
+  CommentFood(
+      String id_blog,
+      String id_user,
+      String title,
+      String username,
+      String userimage,
+      DateTime timestamp,
+      {
+        this.images
+      }
+      ):super(id_blog, id_user, title, username, userimage, timestamp);
 
-  factory CommentFood.fromFirestore(
-      DocumentSnapshot<Map<String, dynamic>> snapshot,
-      SnapshotOptions? options) {
+  factory CommentFood.fromFirestore(DocumentSnapshot<Map<String, dynamic>> snapshot,
+      SnapshotOptions? options){
     final data = snapshot.data();
     return CommentFood(
       data?['id_blog'] ?? "",
       data?['id_user'] ?? "",
       data?['title'] ?? "",
-      data?['username'] ?? "",
-      data?['userimage'] ?? "",
+      data?['username']??"",
+      data?['userimage']??"",
       (data?['timestamp'] as Timestamp).toDate(),
-      images: List<String>.from(data?['images'] ?? []),
+      images:List<String>.from(data?['images'] ?? []),
     );
   }
 
@@ -31,7 +37,7 @@ class CommentFood extends Comment {
       'title': title,
       'username': username,
       'userimage': userimage,
-      'timestamp': timestamp,
+      'timestamp':timestamp,
       'images': List<String>.from(images ?? []),
     };
   }

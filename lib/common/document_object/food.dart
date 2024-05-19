@@ -10,17 +10,16 @@ class Food {
   final String? evaluation;
   final String? restaurant;
 
-  Food(this.id, this.name, this.images, this.open, this.address, this.province,
-      this.evaluation, this.restaurant);
+  Food(this.id,this.name,this.images, this.open,this.address,this.province,this.evaluation,this.restaurant);
 
   factory Food.fromFirestore(DocumentSnapshot<Map<String, dynamic>> snapshot,
-      SnapshotOptions? options) {
+      SnapshotOptions? options){
     final data = snapshot.data();
     return Food(
       data?['id'] ?? "",
       data?['name'] ?? "",
       List<String>.from(data?['images'] ?? []),
-      data?['open'] ?? "",
+      data?['open']??"",
       data?['address'] ?? "",
       data?['province'] ?? "",
       data?['evaluation'] ?? "",
@@ -34,10 +33,10 @@ class Food {
       'name': name,
       'images': List<String>.from(images ?? []),
       'theme': open,
-      'last_username': address,
-      'last_comment': province,
-      'evaluation': evaluation,
-      'restaurant': restaurant,
+      'last_username':address,
+      'last_comment':province,
+      'evaluation':evaluation,
+      'restaurant':restaurant,
     };
   }
 }

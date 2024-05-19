@@ -38,11 +38,11 @@ class CreateBlogController extends GetxController{
 
   Future<void> selectImages() async {
     try{
-     List<XFile>? selectImages = await ImagePicker().pickMultiImage();
-     if(selectImages.isNotEmpty) {
-       listImages.addAll(selectImages);
-       clickSelect.value = true;
-     }
+      List<XFile>? selectImages = await ImagePicker().pickMultiImage();
+      if(selectImages.isNotEmpty) {
+        listImages.addAll(selectImages);
+        clickSelect.value = true;
+      }
     } catch(e){
       print(e);
     }
@@ -66,7 +66,6 @@ class CreateBlogController extends GetxController{
         toFirestore: (Blog blog, options)=>blog.toFirestore(),
       ).doc(documentId).set(data);
     }
-    Future.delayed(const Duration(seconds: 1));
     Navigator.pop(context);
     Get.back();
   }
