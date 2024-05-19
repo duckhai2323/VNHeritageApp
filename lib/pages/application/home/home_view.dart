@@ -7,6 +7,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/state_manager.dart';
 import 'package:vnheritage/common/colors/app_colors.dart';
+import 'package:vnheritage/common/routes/names.dart';
 import 'package:vnheritage/pages/application/home/home_controller.dart';
 import 'package:vnheritage/pages/application/home/item_blog.dart';
 import 'package:vnheritage/share/blog_item.dart';
@@ -51,6 +52,35 @@ class HomePage extends GetView<HomeController>{
                             ),
                           );
                         },
+                      ),
+                    ),
+                  ),
+
+                  Positioned(
+                    top: 30,
+                    left: 20,
+                    child: InkWell(
+                      onTap: (){
+                        Get.toNamed(AppRoutes.SEARCH);
+                      },
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                spreadRadius: 0.25,
+                                blurRadius: 5,
+                                offset: Offset(0,2),
+                              )
+                            ]
+                        ),
+                        child: const Center(
+                          child: Icon(Icons.search,color: AppColors.bottomNaviColor,size: 30,),
+                        ),
                       ),
                     ),
                   ),

@@ -9,4 +9,5 @@ class AppRoutes {
   static const COMMENTBLOG = '/commentblog';
   static const FOOD = '/food';
   static const COMMENTFOOD = '/commentfood';
+  static const SEARCH = '/search';
 }

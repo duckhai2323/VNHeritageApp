@@ -103,7 +103,7 @@ class OptionPage extends StatelessWidget {
                             ),
                             child: const Center(
                               child: Text(
-                                'Dăng ký',
+                                'Đăng ký',
                                 style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.white,

@@ -105,7 +105,7 @@ class CommentPage extends GetView<CommentController>{
                   iconSize: 23,
                   color: AppColors.bottomNaviColor,
                   onPressed: (){
-
+                    Get.back();
                   },
                 ),
               ],

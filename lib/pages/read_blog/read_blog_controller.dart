@@ -113,4 +113,10 @@ class ReadBlogController extends GetxController {
   void HandleCreatePage() {
     Get.toNamed(AppRoutes.CREATEBLOG);
   }
+
+  void ClickBlog(String id_blog) {
+    id.value = id_blog;
+    GetData();
+    GetListBlogs();
+  }
 }

@@ -102,10 +102,10 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
                     ),
                   ),
 
-                  const Positioned(
+                  Positioned(
                     top: 25,
                     left: 25,
-                    child: Icon(Icons.arrow_back_ios,size: 30,color: Colors.white,),
+                    child: InkWell(onTap:(){Get.back();},child: Icon(Icons.arrow_back_ios,size: 30,color: Colors.white,)),
                   ),
 
 
@@ -131,7 +131,7 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
                     bottom: 20,
                     child: Container(
                       width: MediaQuery.of(context).size.width - 30,
-                      padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                       height: 145,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(13),
@@ -193,10 +193,10 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
                             ),
 
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5),
+                              padding: const EdgeInsets.symmetric(vertical: 5),
                               child: Text(
                                 controller.listHeritages.isNotEmpty?controller.listHeritages[0].open??"":'',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 14,
                                     color: AppColors.placeHolderColor
@@ -305,7 +305,7 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
                         child: Text(
                           maxLines: controller.clickMore.value?20:8,
                           overflow: TextOverflow.ellipsis,
-                          controller.listHeritages.isNotEmpty?controller.listHeritages[0].description??"":'',                      style: TextStyle(
+                          controller.listHeritages.isNotEmpty?controller.listHeritages[0].description??"":'',                      style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w500
                         ),

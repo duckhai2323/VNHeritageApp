@@ -39,13 +39,18 @@ class ReadBLogPage extends GetView<ReadBlogController> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back_ios),
-                  iconSize: 23,
-                  color: AppColors.bottomNaviColor,
-                  onPressed: (){
+                InkWell(
+                  onTap: (){
 
                   },
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios),
+                    iconSize: 23,
+                    color: AppColors.bottomNaviColor,
+                    onPressed: (){
+                      Get.back();
+                    },
+                  ),
                 ),
               ],
             ),
@@ -485,7 +490,7 @@ class ReadBLogPage extends GetView<ReadBlogController> {
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                             onTap: (){
-                              //controller.HandleReadBLog(controller.listBlog1[index].id);
+                              controller.ClickBlog(controller.listBlog1[index].id);
                             },
                             child: ItemBlogReadPage(
                                 controller.listBlog1[index].image,
@@ -509,7 +514,7 @@ class ReadBLogPage extends GetView<ReadBlogController> {
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                             onTap: (){
-                              //controller.HandleReadBLog(controller.listBlog1[index].id);
+                             controller.ClickBlog(controller.listBlog2[index].id);
                             },
                             child: ItemBlogReadPage(
                                 controller.listBlog2[index].image,

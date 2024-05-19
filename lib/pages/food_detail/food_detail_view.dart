@@ -111,10 +111,10 @@ class FoodDetailPage extends GetView<FoodDetailController> {
                   ),
 
 
-                  const Positioned(
+                  Positioned(
                     top: 25,
                     left: 25,
-                    child: Icon(Icons.arrow_back_ios,size: 30,color: Colors.white,),
+                    child: InkWell(onTap:(){Get.back();},child: Icon(Icons.arrow_back_ios,size: 30,color: Colors.white,)),
                   ),
 
 

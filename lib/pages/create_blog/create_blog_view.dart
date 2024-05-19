@@ -38,7 +38,7 @@ class CreateBlogPage extends GetView<CreateBlogController> {
                     iconSize: 23,
                     color: AppColors.bottomNaviColor,
                     onPressed: (){
-
+                      Get.back();
                     },
                   ),
                 ],
