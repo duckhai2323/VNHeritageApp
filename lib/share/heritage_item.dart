@@ -83,8 +83,8 @@ class HeritageItem extends GetView<HomeController> {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: 14,
-                color: AppColors.bottomNaviColor
+                  fontSize: 14,
+                  color: AppColors.bottomNaviColor
               ),
             ),
           ),

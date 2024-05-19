@@ -38,11 +38,11 @@ class CreateBlogController extends GetxController{
 
   Future<void> selectImages() async {
     try{
-     List<XFile>? selectImages = await ImagePicker().pickMultiImage();
-     if(selectImages.isNotEmpty) {
-       listImages.addAll(selectImages);
-       clickSelect.value = true;
-     }
+      List<XFile>? selectImages = await ImagePicker().pickMultiImage();
+      if(selectImages.isNotEmpty) {
+        listImages.addAll(selectImages);
+        clickSelect.value = true;
+      }
     } catch(e){
       print(e);
     }
