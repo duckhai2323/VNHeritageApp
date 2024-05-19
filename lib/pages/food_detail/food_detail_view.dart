@@ -49,7 +49,7 @@ class FoodDetailPage extends GetView<FoodDetailController> {
         ),
       ),
       backgroundColor: AppColors.backgroundColor,
-      body: Obx(()=>controller.listFoods.isNotEmpty && controller.listComment.isNotEmpty && controller.listFoodRec.isNotEmpty?SingleChildScrollView(
+      body: Obx(()=>controller.listFoods.isNotEmpty && controller.listFoodRec.isNotEmpty?SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,

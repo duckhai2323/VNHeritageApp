@@ -19,6 +19,7 @@ class HeritageDetailsController extends GetxController {
   final checkSave = false.obs;
   var clickMore = false.obs;
   List<Heritage> listHeritages = <Heritage>[].obs;
+  List<Heritage> listHeritagesDiff = <Heritage>[].obs;
   final heritage_id = ''.obs;
 
   var currPage = 1.obs;
@@ -30,20 +31,22 @@ class HeritageDetailsController extends GetxController {
   void onInit() {
     super.onInit();
     heritage_id.value = Get.parameters['heritage_id']??"";
-    GetData(heritage_id.value);
+    GetData();
     GetListBlogs();
+    GetListHeritages();
   }
 
   void ClickMoreRead() {
     clickMore.value = !clickMore.value;
   }
 
-  Future<void> GetData(String id) async {
+  Future<void> GetData() async {
+    listHeritages.clear();
     await Future.delayed(const Duration(seconds: 0));
     final data = await db.collection("heritages").withConverter(
         fromFirestore: Heritage.fromFirestore,
         toFirestore: (Heritage house, options) => house.toFirestore()
-    ).where("id",isEqualTo: id).get();
+    ).where("id",isEqualTo: heritage_id.value).get();
 
     if(data.docs.isNotEmpty){
       listHeritages.add(data.docs[0].data());
@@ -108,7 +111,40 @@ class HeritageDetailsController extends GetxController {
       }
     });
   }
-  
+
+  Future<void> GetListHeritages() async {
+    var data = await db.collection("heritages").withConverter(
+        fromFirestore: Heritage.fromFirestore,
+        toFirestore: (Heritage heritage, options) => heritage.toFirestore()
+    ).orderBy("timestamp",descending: false);
+    listHeritagesDiff.clear();
+    listener = data.snapshots().listen((event) {
+      for(var change in event.docChanges){
+        switch (change.type){
+          case DocumentChangeType.added:
+            if(change.doc.data()!=null && change.doc.data()!.id != heritage_id.value) {
+              listHeritagesDiff.insert(0, change.doc.data()!);
+            }
+            break;
+          case DocumentChangeType.modified:
+            if(change.doc.data()!=null) {
+              Heritage heritage = change.doc.data()!;
+              for(int i = 0; i < listHeritagesDiff.length; i++){
+                if(listHeritagesDiff[i].id == heritage.id){
+                  listHeritagesDiff.insert(i, heritage);
+                  listHeritagesDiff.removeAt(i+1);
+                }
+              }
+            }
+            break;
+          case DocumentChangeType.removed:
+            break;
+        }
+      }
+    });
+  }
+
+
 
   void ClickItemHeart() async {
     final itemData = listHeritages[0];
@@ -133,5 +169,12 @@ class HeritageDetailsController extends GetxController {
 
   void HandleReadBLog (String blog_id){
     Get.toNamed(AppRoutes.READBLOG,parameters: {"id":blog_id});
+  }
+
+  void ClickItemDiff(String id) {
+    heritage_id.value = id;
+    GetData();
+    GetListBlogs();
+    GetListHeritages();
   }
 }

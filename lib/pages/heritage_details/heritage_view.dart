@@ -442,7 +442,6 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
               width:MediaQuery.of(context).size.width - 30,
-              height: 780,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(13),
                 color: Colors.white,
@@ -480,37 +479,13 @@ class HeritageDetailsPage extends GetView<HeritageDetailsController> {
                     ),
                   ),
 
-                  DefaultTabController(
-                    length: 4,
-                    child: TabBar(
-                      isScrollable: true,
-                      labelColor: AppColors.bottomNaviColor,
-                      unselectedLabelColor: AppColors.placeHolderColor,
-                      tabAlignment: TabAlignment.start,
-                      indicatorColor: AppColors.bottomNaviColor,
-                      onTap: (index){
-
-                      },
-                      dividerHeight: 0,
-                      labelStyle: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600
-                      ),
-                      tabs: const [
-                        Tab(child: Text('Đang hiển thị'),),
-                        Tab(child: Text('Đang phỏng vấn'),),
-                        Tab(child: Text('Chờ xác nhận'),),
-                        Tab(child: Text('Đã kết thúc'),),
-                      ],
-                    ),
-                  ),
-
                   ListView.builder(
-                    itemCount: 5,
+                    padding: EdgeInsets.only(top: 10),
+                    itemCount: controller.listHeritagesDiff.length,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
-                      return HotelItemHorizon(context);
+                      return InkWell(onTap:(){controller.ClickItemDiff(controller.listHeritagesDiff[index].id??"");},child: HotelItemHorizon(context,controller.listHeritagesDiff[index].images[0],controller.listHeritagesDiff[index].title??"", controller.listHeritagesDiff[index].description??""));
                     },
                   ),
                 ],

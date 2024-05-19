@@ -27,20 +27,10 @@ class BlogPage extends GetView<BlogController> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back_ios),
-                  iconSize: 23,
-                  color: AppColors.bottomNaviColor,
-                  onPressed: (){
-
-                  },
-                ),
-              ],
-            ),
+           const SizedBox(
+             height: 30,
+             width: 30,
+           ),
             const Text(
               'Khoảnh khắc du lịch',
               style: TextStyle(

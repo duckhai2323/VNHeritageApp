@@ -63,7 +63,7 @@ class SignUpController extends GetxController {
   Future<void> PushDataUser(BuildContext context) async {
     showLoaderDialog(context);
     String documentId = firebase.collection("users").doc().id;
-    var data  = UserClient(documentId, text1Controller.text.toString(), text2Controller.text.toString(), text3Controller.text.toString(),image: 'https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg');
+    var data  = UserClient(documentId, text1Controller.text.toString(), text2Controller.text.toString(), text3Controller.text.toString(),"","","",image: 'https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg');
     await firebase.collection('users').withConverter(
       fromFirestore: UserClient.fromFirestore,
       toFirestore: (UserClient userdata, options)=>userdata.toFirestore(),

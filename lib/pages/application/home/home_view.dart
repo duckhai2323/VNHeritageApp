@@ -453,7 +453,7 @@ class HomePage extends GetView<HomeController>{
                               index,
                               controller.listHeritages.isNotEmpty?controller.listHeritages[index].title??"":"",
                               controller.listHeritages.isNotEmpty?controller.listHeritages[index].images[0]:"",
-                              controller.listHeritages.isNotEmpty?controller.listHeritages[index].evaluation??"":"",
+                              controller.listHeritages.isNotEmpty?controller.listHeritages[index].description??"":"",
                               controller.listHeritages[index].userlike.contains(ApplicationController.user_id) ? const Icon(CupertinoIcons.heart_solid,color: Colors.pink,size: 25):Icon(CupertinoIcons.heart,color: Colors.white,size: 25),
                           )
                       );

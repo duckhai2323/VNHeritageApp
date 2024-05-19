@@ -11,10 +11,10 @@ class HeritageItem extends GetView<HomeController> {
   int index;
   String title;
   String image;
-  String evaluation;
+  String description;
   Icon icon;
 
-  HeritageItem(this.context,this.index, this.title, this.image, this.evaluation, this.icon);
+  HeritageItem(this.context,this.index, this.title, this.image, this.description, this.icon);
 
   @override
   Widget build(BuildContext context) {
@@ -76,41 +76,17 @@ class HeritageItem extends GetView<HomeController> {
             ),
           ),
 
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
-                margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 3),
-                decoration: const BoxDecoration(
-                    color: AppColors.bottomNaviColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    )
-                ),
-                child:RichText(
-                  text: const TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(text: '4,5', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 14)),
-                      TextSpan(text: '/5', style: TextStyle(color:AppColors.placeHolderColor ,fontWeight: FontWeight.w500, fontSize: 13)),
-                    ],
-                  ),
-                ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10,right: 10),
+            child: Text(
+              description,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 14,
+                color: AppColors.bottomNaviColor
               ),
-
-              Text(
-                '$evaluation Đánh giá',
-                style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
-                    color: AppColors.placeHolderColor
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),

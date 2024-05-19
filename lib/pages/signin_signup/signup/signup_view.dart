@@ -56,7 +56,7 @@ class SignUpPage extends GetView<SignUpController>{
                       const Padding(
                         padding: EdgeInsets.only(top: 25, bottom: 15),
                         child: Text(
-                          'Đăng nhập',
+                          'Đăng ký',
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w500,

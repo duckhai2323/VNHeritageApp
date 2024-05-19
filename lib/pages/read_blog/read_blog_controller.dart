@@ -123,4 +123,8 @@ class ReadBlogController extends GetxController {
   void HandleComment(){
     Get.toNamed(AppRoutes.COMMENTBLOG,parameters: {'id':id.value});
   }
+
+  void HandleCreatePage() {
+    Get.toNamed(AppRoutes.CREATEBLOG);
+  }
 }

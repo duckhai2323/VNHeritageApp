@@ -60,7 +60,7 @@ class ReadBLogPage extends GetView<ReadBlogController> {
 
             InkWell(
               onTap: (){
-
+                controller.HandleCreatePage();
               },
               child: Container(
                 width: 32,
