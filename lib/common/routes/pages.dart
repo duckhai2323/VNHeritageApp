@@ -11,12 +11,11 @@ import 'package:vnheritage/pages/read_blog/comment/comment_binding.dart';
 import 'package:vnheritage/pages/read_blog/comment/comment_view.dart';
 import 'package:vnheritage/pages/read_blog/read_blog_view.dart';
 import 'package:vnheritage/pages/read_blog/read_blog_binding.dart';
-import 'package:vnheritage/pages/search%20/search_binding.dart';
-import 'package:vnheritage/pages/search%20/search_view.dart';
-import 'package:vnheritage/pages/signin_signup/option_page.dart';
 
 import '../../pages/application/application_bindings.dart';
 import '../../pages/application/application_view.dart';
+import '../../pages/search/search_binding.dart';
+import '../../pages/search/search_view.dart';
 import '../../pages/signin_signup/signin/signin_binding.dart';
 import '../../pages/signin_signup/signin/signin_view.dart';
 import '../../pages/signin_signup/signup/signup_binding.dart';

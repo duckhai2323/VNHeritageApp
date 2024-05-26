@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:vnheritage/common/routes/names.dart';
-import 'package:vnheritage/pages/search%20/search_controller.dart';
+import 'package:vnheritage/pages/search/search_controller.dart';
 
 import '../../common/colors/app_colors.dart';
 class SearchPage extends GetView<Search1Controller> {
